@@ -1,5 +1,7 @@
 package ru.practiceground.presentation.root
 
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +12,17 @@ import kotlinx.android.synthetic.main.root_fragment.*
 import ru.practiceground.R
 import ru.practiceground.databinding.RootFragmentBinding
 import ru.practiceground.other.getBinding
+import ru.practiceground.other.getColor
 import ru.practiceground.presentation.base.BaseFragment
 
 class RootFragment : BaseFragment() {
 
     override val viewModel: RootViewModel by viewModels()
+    override val bgDrawable: Drawable? = ColorDrawable(getColor(R.color.whiteFFF))
+
+    private val rootAdapter = RootAdapter()
     private lateinit var binding: RootFragmentBinding
     private lateinit var lm: GridLayoutManager
-    private val rootAdapter = RootAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = getBinding(container, R.layout.root_fragment)

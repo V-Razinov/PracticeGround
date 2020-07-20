@@ -11,7 +11,7 @@ class RootViewModel : BaseViewModel() {
     override fun onViewCreated() {
         super.onViewCreated()
         items.value = listOf(
-            RootItem(RootItemTypes.DISCORD_VIEW_PAGER, "ВьюПоггер")
+            RootItem(RootItemTypes.DISCORD_VIEW_PAGER, "Farewell's discord")
         )
     }
 

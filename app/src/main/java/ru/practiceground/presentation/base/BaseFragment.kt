@@ -1,7 +1,10 @@
 package ru.practiceground.presentation.base
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -10,10 +13,12 @@ import androidx.lifecycle.ViewModel
 abstract class BaseFragment : Fragment() {
 
     abstract val viewModel: BaseViewModel
+    abstract val bgDrawable: Drawable?
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.onViewCreated()
+        setBgDrawable()
     }
 
     override fun onResume() {
@@ -38,5 +43,9 @@ abstract class BaseFragment : Fragment() {
 
     protected fun <T>MutableLiveData<T>.setObserver(action: (T) -> Unit) {
         observe(viewLifecycleOwner, Observer(action::invoke))
+    }
+
+    private fun setBgDrawable() {
+        activity?.window?.setBackgroundDrawable(bgDrawable)
     }
 }

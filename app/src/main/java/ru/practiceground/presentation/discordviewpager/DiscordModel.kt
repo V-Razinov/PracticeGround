@@ -1,7 +1,6 @@
 package ru.practiceground.presentation.discordviewpager
 
 import android.graphics.drawable.Drawable
-import android.media.Image
 
 class MessageItem(
     val image: Drawable?,

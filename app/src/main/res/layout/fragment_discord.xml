@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="ru.practiceground.presentation.discordviewpager.DiscordViewModel" />
+    </data>
+
+    <ru.practiceground.other.customviews.discordpanelsView.DiscordPanelsLayout
+        android:id="@+id/discord_panels"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black223">
+
+        <FrameLayout
+            android:id="@+id/panel_start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_rounded_10dp"
+            android:backgroundTint="@color/grey995">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="START PANEL"
+                android:textColor="@color/whiteFFF"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/panel_end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_rounded_10dp"
+            android:backgroundTint="@color/grey995">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="END PANEL"
+                android:textColor="@color/whiteFFF"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/panel_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_rounded_10dp">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/panel_center_tb"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:actionBarSize"
+                    android:background="@color/black232"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:menu="@menu/discord_menu"
+                    app:title="gq-discuss"
+                    app:titleTextColor="@color/whiteFFF" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/panel_center_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:clipToPadding="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/panel_center_tb" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/panel_center_block_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:background="@drawable/bg_rounded_10dp"
+                android:visibility="gone"
+                android:backgroundTint="@color/black232_50_transparent"/>
+        </androidx.cardview.widget.CardView>
+    </ru.practiceground.other.customviews.discordpanelsView.DiscordPanelsLayout>
+</layout>
