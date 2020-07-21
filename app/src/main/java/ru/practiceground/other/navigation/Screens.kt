@@ -1,6 +1,6 @@
 package ru.practiceground.other.navigation
 
-import ru.practiceground.presentation.discordviewpager.DiscordFragment
+import ru.practiceground.presentation.discord.DiscordFragment
 import ru.practiceground.presentation.root.RootFragment
 
 object Screens {

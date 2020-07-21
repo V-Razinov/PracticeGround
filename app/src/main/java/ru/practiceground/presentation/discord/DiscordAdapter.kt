@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.discordviewpager
+package ru.practiceground.presentation.discord
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

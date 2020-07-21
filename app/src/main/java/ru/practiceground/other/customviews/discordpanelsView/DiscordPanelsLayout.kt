@@ -3,8 +3,10 @@ package ru.practiceground.other.customviews.discordpanelsView
 import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -28,17 +30,26 @@ class DiscordPanelsLayout : FrameLayout {
         LEFT, RIGHT, NONE
     }
 
+    enum class CurrentPanel {
+        LEFT, RIGHT, CENTER
+    }
+
     private lateinit var panelCenter: ViewGroup
     private lateinit var panelStart: ViewGroup
     private lateinit var panelEnd: ViewGroup
+    private var centerPanelBlockView: View? = null
 
     private var overLappingWidth: Float = Float.NaN
+    private var currentPanel = CurrentPanel.CENTER
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        if (childCount != 3)
+            throw Exception("${DiscordPanelsLayout::class.java}: 3 childs required")
+    }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-
-        if (childCount != 3)
-            throw Exception("${DiscordPanelsLayout::class.java}: 3 childs required")
 
         panelStart = getChildAt(0) as ViewGroup
         panelEnd = getChildAt(1) as ViewGroup
@@ -64,18 +75,26 @@ class DiscordPanelsLayout : FrameLayout {
 
     fun movePanelToRight() = panelCenter.animateX(panelCenter.width - overLappingWidth, true)
 
+    fun movePanelToCenter() = panelCenter.animateX(0f, false)
+
     private fun addBlockViewIntoCentralPanel() {
-        panelCenter.addView(View(context).apply {
-            layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            background = ColorDrawable(getColor(R.color.black232_50_transparent))
-        })
+        centerPanelBlockView = View(context).apply {
+            layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT).apply {
+                isClickable = true
+                isFocusable = true
+                isFocusableInTouchMode = false
+                isVisible = false
+            }
+            background = context.getDrawable(R.drawable.bg_rounded_10dp)
+            backgroundTintList = ColorStateList.valueOf(getColor(R.color.black232_50_transparent))
+        }
+        panelCenter.addView(centerPanelBlockView)
     }
 
     private fun setPanelCenterTouchListener() {
 
         var isDragging = false
-        var moveDirection =
-            MoveDirection.NONE
+        var moveDirection = MoveDirection.NONE
         var lastX: Float = panelCenter.x
         var deltaX: Float = Float.NaN
 
@@ -85,7 +104,7 @@ class DiscordPanelsLayout : FrameLayout {
             return@setOnTouchListener if (action == MotionEvent.ACTION_DOWN && !isDragging) {
                 isDragging = true
                 deltaX = event.x
-                false
+                true
             } else if (isDragging) {
                 when (action) {
                     MotionEvent.ACTION_MOVE -> {
@@ -105,9 +124,9 @@ class DiscordPanelsLayout : FrameLayout {
                     MotionEvent.ACTION_UP -> {
                         isDragging = false
                         when (moveDirection) {
-                            MoveDirection.RIGHT -> view.animateX(view.width - overLappingWidth, true)
-                            MoveDirection.LEFT -> view.animateX(-(view.width - overLappingWidth), true)
-                            MoveDirection.NONE -> view.animateX(0f, false)
+                            MoveDirection.RIGHT -> movePanelToRight()
+                            MoveDirection.LEFT -> movePanelToLeft()
+                            MoveDirection.NONE -> movePanelToCenter()
                         }
                         true
                     }
@@ -124,8 +143,7 @@ class DiscordPanelsLayout : FrameLayout {
     private fun setPanelStartTouchListener() {
 
         var isDragging = false
-        var moveDirection =
-            MoveDirection.NONE
+        var moveDirection = MoveDirection.NONE
         var lastX: Float = panelCenter.x
 
         panelStart.setOnTouchListener { view, event ->
@@ -144,7 +162,7 @@ class DiscordPanelsLayout : FrameLayout {
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                         isDragging = false
                         if (moveDirection == MoveDirection.RIGHT)
-                            panelCenter.animateX(0f, false)
+                            movePanelToCenter()
                         true
                     }
                     else -> {
@@ -160,8 +178,7 @@ class DiscordPanelsLayout : FrameLayout {
     private fun setPanelEndTouchListener() {
 
         var isDragging = false
-        var moveDirection =
-            MoveDirection.NONE
+        var moveDirection = MoveDirection.NONE
         var lastX: Float = panelCenter.x
 
         panelEnd.setOnTouchListener { view, event ->
@@ -180,7 +197,7 @@ class DiscordPanelsLayout : FrameLayout {
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                         isDragging = false
                         if (moveDirection == MoveDirection.LEFT)
-                            panelCenter.animateX(0f, false)
+                            movePanelToCenter()
                         true
                     }
                     else -> {
@@ -208,14 +225,12 @@ class DiscordPanelsLayout : FrameLayout {
             .x(toX)
             .setListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {}
+                override fun onAnimationCancel(animation: Animator?) {}
+                override fun onAnimationStart(animation: Animator?) {}
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    panel_center_block_view.isVisible = blockCenterPanel
+                    centerPanelBlockView?.isVisible = blockCenterPanel
                 }
-
-                override fun onAnimationCancel(animation: Animator?) {}
-
-                override fun onAnimationStart(animation: Animator?) {}
             })
             .setUpdateListener {
                 if (x > 0) showStartPanel() else showEndPanel()

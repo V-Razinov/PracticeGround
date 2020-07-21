@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.discordviewpager
+package ru.practiceground.presentation.discord
 
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_discord.*
 import ru.practiceground.R
 import ru.practiceground.databinding.FragmentDiscordBinding
 import ru.practiceground.other.getBinding
 import ru.practiceground.other.getColor
 import ru.practiceground.presentation.base.BaseFragment
-
 
 class DiscordFragment : BaseFragment() {
 
@@ -38,8 +38,9 @@ class DiscordFragment : BaseFragment() {
             adapter = this@DiscordFragment.adapter
             layoutManager = LinearLayoutManager(context)
         }
-
         subscribe()
+        Glide.with(this).load(R.drawable.rick_dance).into(panel_start_iv)
+        Glide.with(this).load(R.drawable.aniki_flip).into(panel_end_iv)
     }
 
     private fun setupToolbar() {

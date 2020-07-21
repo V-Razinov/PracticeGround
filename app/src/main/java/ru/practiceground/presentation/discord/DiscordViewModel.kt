@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.discordviewpager
+package ru.practiceground.presentation.discord
 
 import androidx.lifecycle.MutableLiveData
 import ru.practiceground.presentation.base.BaseViewModel

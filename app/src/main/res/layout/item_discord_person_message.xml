@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="ru.practiceground.presentation.discordviewpager.MessageItem" />
+            type="ru.practiceground.presentation.discord.MessageItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:ellipsize="end"
-            android:text="Farewell..."
+            android:text="@{item.nickname}"
             android:textColor="@color/grey995"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/item_datetime_tv"
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Today at 5:45 PM"
+            android:text="@{item.date}"
             android:textColor="@color/grey995"
             android:textSize="10sp"
             android:fontFamily="sans-serif-light"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Message"
+            android:text="@{item.message}"
             android:textColor="@color/whiteFFF"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

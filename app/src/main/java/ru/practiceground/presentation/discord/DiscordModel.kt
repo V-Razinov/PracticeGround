@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.discordviewpager
+package ru.practiceground.presentation.discord
 
 import android.graphics.drawable.Drawable
 
