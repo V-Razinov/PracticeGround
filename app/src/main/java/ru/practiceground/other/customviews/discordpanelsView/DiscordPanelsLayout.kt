@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.cardview.widget.CardView
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -20,7 +21,7 @@ import ru.practiceground.other.getColor
 import kotlin.math.abs
 
 @SuppressLint("ClickableViewAccessibility")
-class DiscordPanelsLayout : FrameLayout {
+class DiscordPanelsLayout : CardView {
 
     constructor(ctx: Context) : super(ctx)
     constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)

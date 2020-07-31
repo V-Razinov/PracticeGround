@@ -13,7 +13,6 @@ class App : Application() {
     }
 
     companion object {
-        lateinit var instance: App
         lateinit var context: Context
         lateinit var router: Router
     }

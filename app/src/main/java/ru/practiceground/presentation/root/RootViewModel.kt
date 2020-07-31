@@ -3,6 +3,7 @@ package ru.practiceground.presentation.root
 import androidx.lifecycle.MutableLiveData
 import ru.practiceground.other.navigation.Screens
 import ru.practiceground.presentation.base.BaseViewModel
+import ru.practiceground.presentation.root.RootItemTypes.*
 
 class RootViewModel : BaseViewModel() {
 
@@ -11,13 +12,17 @@ class RootViewModel : BaseViewModel() {
     override fun onViewCreated() {
         super.onViewCreated()
         items.value = listOf(
-            RootItem(RootItemTypes.DISCORD_VIEW_PAGER, "Farewell's discord")
+            RootItem(DISCORD_VIEW_PAGER),
+            RootItem(EXPANDABLE_RECYCLER),
+            RootItem(ALL_IN_ONE)
         )
     }
 
-    fun onItemClick(type: RootItemTypes){
-        when(type) {
-            RootItemTypes.DISCORD_VIEW_PAGER -> router.navigateTo(Screens.discord)
+    fun onItemClick(type: RootItemTypes) {
+        when (type) {
+            DISCORD_VIEW_PAGER -> router.navigateTo(Screens.discord)
+            EXPANDABLE_RECYCLER -> router.navigateTo(Screens.expandableRecView)
+            ALL_IN_ONE -> router.navigateTo(Screens.allInOneRecVIew)
         }
     }
 }

@@ -10,7 +10,6 @@ class Router {
     private var containerId: Int = -1
 
     private val size get() = fragmentManager.fragments.size
-    private val fragments get() = fragmentManager.fragments
 
     fun init(fragmentManager: FragmentManager, containerId: Int, finishActivity: () -> Unit) {
         this.fragmentManager = fragmentManager
@@ -19,28 +18,21 @@ class Router {
     }
 
     fun navigateTo(fragment: BaseFragment) {
-        fragmentManager.apply {
-            if (size > 0) hideCurrentFragment()
-            beginTransaction()
-                .add(containerId, fragment)
+        fragmentManager.beginTransaction()
+                .replace(containerId, fragment)
                 .addToBackStack(null)
                 .commit()
-        }
     }
 
     fun back() {
-        if (size == 1) {
+        if (fragmentManager.backStackEntryCount == 1)
             finishActivity.invoke()
-        } else {
-            fragmentManager.apply {
-                popBackStack()
-                showLastFragment()
-            }
-        }
+        else
+            fragmentManager.popBackStack()
     }
 
     fun newRootScreen(fragment: BaseFragment) {
-        repeat(size) {
+        repeat(fragmentManager.backStackEntryCount) {
             fragmentManager.popBackStackImmediate()
         }
         navigateTo(fragment)
@@ -51,15 +43,5 @@ class Router {
             .replace(containerId, fragment)
             .addToBackStack(null)
             .commit()
-    }
-
-    private fun FragmentManager.hideCurrentFragment() {
-        executePendingTransactions()
-        fragments.last().let { beginTransaction().hide(it).commit() }
-    }
-
-    private fun FragmentManager.showLastFragment() {
-        executePendingTransactions()
-        fragments.last().let { beginTransaction().show(it).commit() }
     }
 }

@@ -11,24 +11,6 @@ class DiscordViewModel : BaseViewModel() {
         super.onViewCreated()
         messages.value = listOf(
             MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
-            MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn"),
             MessageItem(null, "Farewell...", "Today at 12:02 PM", "keep plebn")
         )
     }

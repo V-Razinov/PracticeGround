@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -37,6 +38,7 @@ class DiscordFragment : BaseFragment() {
         panel_center_rv.apply {
             adapter = this@DiscordFragment.adapter
             layoutManager = LinearLayoutManager(context)
+            isGone = true
         }
         subscribe()
         Glide.with(this).load(R.drawable.rick_dance).into(panel_start_iv)
