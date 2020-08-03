@@ -2,6 +2,7 @@ package ru.practiceground.presentation.allinonerecview
 
 import androidx.lifecycle.MutableLiveData
 import ru.practiceground.R
+import ru.practiceground.other.views.DragToShowActionsLayout
 import ru.practiceground.presentation.base.BaseRecViewItem
 import ru.practiceground.presentation.base.BaseViewModel
 
@@ -21,20 +22,27 @@ class AllInOneRecViewViewModel : BaseViewModel() {
                     GifItem(R.drawable.kepp_speak)
                 )
             ),
+            SwipeItem(DragToShowActionsLayout.Panels.START),
             SwipeItem(),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator")
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem(),
+            SwipeItem()
         )
     }
 }

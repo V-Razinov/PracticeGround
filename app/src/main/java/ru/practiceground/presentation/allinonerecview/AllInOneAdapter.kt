@@ -2,11 +2,14 @@ package ru.practiceground.presentation.allinonerecview
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_expandable1.view.*
 import kotlinx.android.synthetic.main.item_horizontal_rec_view.view.*
+import kotlinx.android.synthetic.main.item_swipe.view.*
 import ru.practiceground.R
 import ru.practiceground.other.getView
 import ru.practiceground.presentation.base.BaseRecViewItem
@@ -57,13 +60,34 @@ class AllInOneAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (holder) {
             is ExpandableViewHolder -> holder.bind(items[position] as ExpandableItem)
             is HorizontalRecViewHolder -> holder.bind(items[position] as HorizontalRecViewItem)
+            is SwipeViewHolder -> holder.bind(items[position] as SwipeItem)
         }
     }
 
     inner class SwipeViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+
         fun bind(item: SwipeItem) {
             view.apply {
+                item_swipe_to_show_view.apply {
+                    setOnCentralPanelClickListener {
+                        Toast.makeText(context, item.currentPanel.name, Toast.LENGTH_LONG).show()
+                    }
+                    setCurrentPanel(item.currentPanel, true)
+                    setOnPanelChangedListener { item.currentPanel = it }
+                    setOnMovingListener(
+                        onStarted = { _, _, _ ->
+                            item_top_line_v.isVisible = true
+                            item_bottom_line_v.isVisible = true
+                        },
+                        onEnded =  { _, _, _ ->
+                            item_top_line_v.isInvisible = true
+                            item_bottom_line_v.isInvisible = true
+                        }
+                    )
+                }
 
+                item_delete_iv.setOnClickListener { Toast.makeText(context, "Смэрть", Toast.LENGTH_LONG).show() }
+                item_resend_iv.setOnClickListener { Toast.makeText(context, "Смэрть", Toast.LENGTH_LONG).show() }
             }
         }
     }

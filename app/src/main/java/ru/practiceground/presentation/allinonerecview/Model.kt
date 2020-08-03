@@ -1,6 +1,7 @@
 package ru.practiceground.presentation.allinonerecview
 
 import androidx.annotation.DrawableRes
+import ru.practiceground.other.views.DragToShowActionsLayout.*
 import ru.practiceground.presentation.base.BaseRecViewItem
 
 class ExpandableItem(
@@ -19,5 +20,5 @@ class GifItem(
 ) : BaseRecViewItem()
 
 class SwipeItem(
-
+    var currentPanel: Panels = Panels.CENTER
 ) : BaseRecViewItem()
