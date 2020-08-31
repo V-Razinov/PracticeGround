@@ -1,10 +1,11 @@
 package ru.practiceground.other.views
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnClickListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import ru.practiceground.other.extensions.setListener
 import kotlin.math.abs
@@ -15,14 +16,17 @@ class DragToShowActionsLayout : ConstraintLayout {
     constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)
     constructor(ctx: Context, attrs: AttributeSet, style: Int) : super(ctx, attrs, style)
 
-    var currentPanel: Panels by Delegates.observable(Panels.CENTER) { _, oldValue, newValue ->
-        if (oldValue != newValue) mOnCurrentPanelChangedListener?.onPanelChanged(newValue)
-    }
-        private set
+    enum class Panels { START, CENTER, END }
+    enum class MoveDirections { LEFT, CENTER, RIGHT }
+
+    private var ACTION_CLICK_TIME = 150L
 
     private lateinit var panelStart: View
     private lateinit var panelCenter: View
     private lateinit var panelEnd: View
+    private var currentPanel: Panels by Delegates.observable(Panels.CENTER) { _, oldValue, newValue ->
+        if (oldValue != newValue) mOnCurrentPanelChangedListener?.onPanelChanged(newValue)
+    }
 
     private var mOnCurrentPanelChangedListener: OnCurrentPanelChangedListener? = null
     private var mOnMovingListener: OnMovingListener? = null
@@ -49,21 +53,10 @@ class DragToShowActionsLayout : ConstraintLayout {
 
         setCenterPanelTouchListener()
         isInited = true
-        setCurrentPanel(currentPanel, false)
+        setCurrentPanel(Panels.CENTER, false)
     }
 
     override fun setOnClickListener(l: OnClickListener?) = Unit
-
-    fun setCurrentPanel(panel: Panels, animate: Boolean = true) {
-        val direction = when (panel) {
-            Panels.START -> MoveDirections.RIGHT
-            Panels.CENTER -> MoveDirections.CENTER
-            Panels.END -> MoveDirections.LEFT
-        }
-        currentPanel = panel
-        if (isInited)
-            moveCenterPanel(direction, animate)
-    }
 
     fun setOnCentralPanelClickListener(action: (View) -> Unit) {
         panelCenterOnClickListener = OnClickListener { action.invoke(it) }
@@ -100,8 +93,23 @@ class DragToShowActionsLayout : ConstraintLayout {
         mOnMovingListener = listener
     }
 
+    fun setActionClickTime(time: Long) {
+        ACTION_CLICK_TIME = time
+    }
+
+    private fun setCurrentPanel(panel: Panels, animate: Boolean = true) {
+        val direction = when (panel) {
+            Panels.START -> MoveDirections.RIGHT
+            Panels.CENTER -> MoveDirections.CENTER
+            Panels.END -> MoveDirections.LEFT
+        }
+        currentPanel = panel
+        if (isInited)
+            moveCenterPanel(direction, animate)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     private fun setCenterPanelTouchListener() {
-        val ACTION_CLICK_TIME = 100L
         var startX = Float.NaN
         var prevX = Float.NaN
         var prevY = Float.NaN
@@ -109,10 +117,10 @@ class DragToShowActionsLayout : ConstraintLayout {
         var isDragging by Delegates.observable(false) { _, oldValue, newValue ->
             parent.requestDisallowInterceptTouchEvent(newValue)
             mOnMovingListener?.let { mOnMovingListener ->
-                if (!oldValue && newValue)
-                    mOnMovingListener.onMovingStarted(panelStart, panelEnd, panelCenter)
-                if (oldValue && newValue)
-                    mOnMovingListener.onMoving(panelStart, panelEnd, panelCenter)
+                when {
+                    !oldValue && newValue -> mOnMovingListener.onMovingStarted(panelStart, panelEnd, panelCenter)
+                    oldValue && newValue -> mOnMovingListener.onMoving(panelStart, panelEnd, panelCenter)
+                }
             }
         }
 
@@ -120,37 +128,42 @@ class DragToShowActionsLayout : ConstraintLayout {
             return@setOnTouchListener when(event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     view.animation?.cancel()
-                    startX = event.x
                     prevX = startX
                     prevY = event.y
                     true
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    if (event.eventTime < ACTION_CLICK_TIME) return@setOnTouchListener false
+                    if (event.eventTime - event.downTime < ACTION_CLICK_TIME) {
+                        prevX = event.x
+                        prevY = event.y
+                        return@setOnTouchListener false
+                    }
+
                     times = tryCatchDragging(isDragging, prevX, event, prevY, times)
                     isDragging = times > 5
                     if (!isDragging) return@setOnTouchListener false
 
-                    mOnMovingListener
-                    val nextX = view.x + event.x - startX
-                    view.x = if (nextX <= panelStart.x1 && nextX + view.width >= panelEnd.x0)
-                        nextX
-                    else
-                        if (abs(abs(view.x0) - abs(panelStart.x1)) < abs(abs(view.x1) - abs(panelEnd.x0)))
-                            panelStart.x1
-                        else
-                            panelEnd.x - view.width
+                    if (startX.isNaN()) startX = event.x
 
+                    val nextX = view.x + event.x - startX
+                    view.x = when {
+                        nextX <= panelStart.x1 && nextX + view.width >= panelEnd.x0 -> nextX
+                        nextX > panelStart.x1 -> panelStart.x1
+                        nextX + view.width < panelEnd.x0 -> panelStart.x0 - panelEnd.width
+                        else -> nextX
+                    }
                     prevX = event.x
                     prevY = event.y
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (event.eventTime - event.downTime < ACTION_CLICK_TIME)
-                        view.performClick()
-                    else getMoveDirection(view)?.let { direction ->
-                        setCurrentPanel(direction)
-                        moveCenterPanel(direction)
+                    if (event.eventTime - event.downTime < ACTION_CLICK_TIME) {
+                        view.isPressed = true
+                    } else {
+                        getMoveDirection(view)?.let { direction ->
+                            setCurrentPanel(direction)
+                            moveCenterPanel(direction)
+                        }
                     }
                     isDragging = false
                     startX = Float.NaN
@@ -180,8 +193,9 @@ class DragToShowActionsLayout : ConstraintLayout {
         }
     }
 
-    private fun getMoveDirection(view: View): MoveDirections? =
-        if (view.x0 in panelStart.run { x0..xCenter } || view.x1 in panelEnd.run { xCenter..x1 })
+    private fun getMoveDirection(view: View): MoveDirections? {
+        if (view.x0 == 0f) return MoveDirections.CENTER
+        return if (view.x0 in panelStart.run { x0..xCenter } || view.x1 in panelEnd.run { xCenter..x1 })
             MoveDirections.CENTER
         else
             if (view.x0 in panelStart.run { xCenter..x1 })
@@ -190,6 +204,7 @@ class DragToShowActionsLayout : ConstraintLayout {
                 MoveDirections.LEFT
             else
                 null
+    }
 
     private fun tryCatchDragging(isDragging: Boolean, prevX: Float, event: MotionEvent, prevY: Float, times: Int): Int {
         var times1 = times
@@ -218,14 +233,6 @@ class DragToShowActionsLayout : ConstraintLayout {
             panelCenter.x = toX
             mOnMovingListener?.onMovingEnded(panelStart, panelEnd, panelStart)
         }
-    }
-
-    enum class Panels {
-        START, CENTER, END
-    }
-
-    enum class MoveDirections {
-        LEFT, CENTER, RIGHT
     }
 
     interface OnCurrentPanelChangedListener {

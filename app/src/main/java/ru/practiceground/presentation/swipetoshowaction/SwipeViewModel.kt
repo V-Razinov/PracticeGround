@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.allinonerecview
+package ru.practiceground.presentation.swipetoshowaction
 
 import androidx.lifecycle.MutableLiveData
 import ru.practiceground.R
@@ -6,22 +6,13 @@ import ru.practiceground.other.views.DragToShowActionsLayout
 import ru.practiceground.presentation.base.BaseRecViewItem
 import ru.practiceground.presentation.base.BaseViewModel
 
-class AllInOneRecViewViewModel : BaseViewModel() {
+class SwipeViewModel : BaseViewModel() {
 
     val items = MutableLiveData<List<BaseRecViewItem>>()
 
     override fun onViewCreated() {
         super.onViewCreated()
         items.value = listOf(
-            ExpandableItem("enable memory view", "Appearance & Behavior -> Appearance-> Window options -> enable show Memory indicator"),
-            HorizontalRecViewItem(
-                listOf(
-                    GifItem(R.drawable.rick_dance),
-                    GifItem(R.drawable.aniki_flip),
-                    GifItem(R.drawable.aniki1),
-                    GifItem(R.drawable.kepp_speak)
-                )
-            ),
             SwipeItem(DragToShowActionsLayout.Panels.START),
             SwipeItem(),
             SwipeItem(),

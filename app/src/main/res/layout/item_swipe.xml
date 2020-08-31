@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ru.practiceground.other.views.DragToShowActionsLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_swipe_to_show_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -98,7 +99,8 @@
             android:layout_height="1dp"
             android:background="@color/blue728"
             android:visibility="invisible"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible"/>
 
         <View
             android:id="@+id/item_bottom_line_v"
@@ -106,6 +108,7 @@
             android:layout_height="1dp"
             android:background="@color/blue728"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ru.practiceground.other.views.DragToShowActionsLayout>

@@ -14,15 +14,12 @@ class RootViewModel : BaseViewModel() {
         items.value = listOf(
             RootItem(DISCORD_VIEW_PAGER),
             RootItem(EXPANDABLE_RECYCLER),
-            RootItem(ALL_IN_ONE)
+            RootItem(ALL_IN_ONE),
+            RootItem(FINGERPRINT)
         )
     }
 
     fun onItemClick(type: RootItemTypes) {
-        when (type) {
-            DISCORD_VIEW_PAGER -> router.navigateTo(Screens.discord)
-            EXPANDABLE_RECYCLER -> router.navigateTo(Screens.expandableRecView)
-            ALL_IN_ONE -> router.navigateTo(Screens.allInOneRecVIew)
-        }
+        router.navigateTo(type.getFragment.invoke())
     }
 }
