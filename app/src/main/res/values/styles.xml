@@ -4,6 +4,14 @@
         <item name="android:statusBarColor">@color/black223</item>
     </style>
 
+    <style name="Drawer">
+        <item name="android:textColorSecondary">@color/blue728</item>
+    </style>
+
+    <style name="Drawer2">
+        <item name="android:textColorSecondary">@color/whiteFFF</item>
+    </style>
+
     <style name="roundedImageViewRounded">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>

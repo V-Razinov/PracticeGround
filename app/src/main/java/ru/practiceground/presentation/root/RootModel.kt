@@ -9,8 +9,9 @@ class RootItem(
 )
 
 enum class RootItemTypes(val title: String, val getFragment: () -> BaseFragment) {
-    DISCORD_VIEW_PAGER("Farewell's discord", Screens::fingerprint::get),
-    EXPANDABLE_RECYCLER("Expandable Recycler", Screens::fingerprint::get),
-    ALL_IN_ONE("All in One rec view", Screens::fingerprint::get),
-    FINGERPRINT("FingerPrint", Screens::fingerprint::get)
+    DISCORD_VIEW_PAGER("Farewell's discord", Screens::discord::get),
+    EXPANDABLE_RECYCLER("Expandable Recycler", Screens::expandableRecView::get),
+    ALL_IN_ONE("All in One rec view", Screens::allInOneRecVIew::get),
+    FINGERPRINT("FingerPrint", Screens::fingerprint::get),
+    DRAWER("Drawer", Screens::drawer::get)
 }

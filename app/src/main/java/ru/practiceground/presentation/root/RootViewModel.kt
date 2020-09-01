@@ -1,7 +1,6 @@
 package ru.practiceground.presentation.root
 
 import androidx.lifecycle.MutableLiveData
-import ru.practiceground.other.navigation.Screens
 import ru.practiceground.presentation.base.BaseViewModel
 import ru.practiceground.presentation.root.RootItemTypes.*
 
@@ -11,15 +10,10 @@ class RootViewModel : BaseViewModel() {
 
     override fun onViewCreated() {
         super.onViewCreated()
-        items.value = listOf(
-            RootItem(DISCORD_VIEW_PAGER),
-            RootItem(EXPANDABLE_RECYCLER),
-            RootItem(ALL_IN_ONE),
-            RootItem(FINGERPRINT)
-        )
+        items.value = RootItemTypes.values().map { RootItem(it) }
     }
 
-    fun onItemClick(type: RootItemTypes) {
-        router.navigateTo(type.getFragment.invoke())
+    fun onItemClick(item: RootItemTypes) {
+        router.navigateTo(item.getFragment())
     }
 }

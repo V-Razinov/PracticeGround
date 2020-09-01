@@ -1,7 +1,11 @@
 package ru.practiceground.other.extensions
 
 import android.animation.Animator
+import android.view.MenuItem
 import android.view.ViewPropertyAnimator
+import android.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
 fun ViewPropertyAnimator.setListener(
     onStart: (animator: Animator?) -> Unit = { },
@@ -14,3 +18,7 @@ fun ViewPropertyAnimator.setListener(
     override fun onAnimationCancel(animation: Animator?) = onCancel.invoke(animation)
     override fun onAnimationRepeat(animation: Animator?) = onRepeat.invoke(animation)
 })
+
+fun NavigationView.setOnMenuItemClickListener(action: (item: MenuItem) -> Boolean) {
+    setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener(action))
+}
