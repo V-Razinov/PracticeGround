@@ -12,7 +12,7 @@ object Screens {
     val mainScreen get() = RootFragment()
     val discord get() = DiscordFragment()
     val expandableRecView get() = ExpandableRecyclerFragment()
-    val allInOneRecVIew get() = SwipeFragment()
+    val swipeToShowAction get() = SwipeFragment()
     val fingerprint get() = FingerPrintFragment()
     val drawer get() = DrawerFragment()
 }

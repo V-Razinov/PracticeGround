@@ -9,7 +9,7 @@
             type="ru.practiceground.presentation.discord.DiscordViewModel" />
     </data>
 
-    <ru.practiceground.other.customviews.discordpanelsView.DiscordPanelsLayout
+    <ru.practiceground.other.customviews.DiscordPanelsLayout
         android:id="@+id/discord_panels"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -90,5 +90,5 @@
                 android:visibility="gone"
                 android:backgroundTint="@color/black232_50_transparent"/>
         </androidx.cardview.widget.CardView>
-    </ru.practiceground.other.customviews.discordpanelsView.DiscordPanelsLayout>
+    </ru.practiceground.other.customviews.DiscordPanelsLayout>
 </layout>

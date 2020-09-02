@@ -1,8 +1,7 @@
 package ru.practiceground.presentation.swipetoshowaction
 
 import androidx.lifecycle.MutableLiveData
-import ru.practiceground.R
-import ru.practiceground.other.views.DragToShowActionsLayout
+import ru.practiceground.other.customviews.DragToShowActionsLayout
 import ru.practiceground.presentation.base.BaseRecViewItem
 import ru.practiceground.presentation.base.BaseViewModel
 

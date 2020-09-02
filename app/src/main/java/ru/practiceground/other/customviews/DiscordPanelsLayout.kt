@@ -1,4 +1,4 @@
-package ru.practiceground.other.customviews.discordpanelsView
+package ru.practiceground.other.customviews
 
 import android.animation.Animator
 import android.annotation.SuppressLint

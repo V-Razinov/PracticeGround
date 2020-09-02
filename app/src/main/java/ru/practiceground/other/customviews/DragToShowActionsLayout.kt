@@ -1,4 +1,4 @@
-package ru.practiceground.other.views
+package ru.practiceground.other.customviews
 
 import android.annotation.SuppressLint
 import android.content.Context

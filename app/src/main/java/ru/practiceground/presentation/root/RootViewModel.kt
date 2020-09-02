@@ -2,7 +2,6 @@ package ru.practiceground.presentation.root
 
 import androidx.lifecycle.MutableLiveData
 import ru.practiceground.presentation.base.BaseViewModel
-import ru.practiceground.presentation.root.RootItemTypes.*
 
 class RootViewModel : BaseViewModel() {
 
@@ -10,10 +9,10 @@ class RootViewModel : BaseViewModel() {
 
     override fun onViewCreated() {
         super.onViewCreated()
-        items.value = RootItemTypes.values().map { RootItem(it) }
+        items.value = RootItems.values().map { RootItem(it) }
     }
 
-    fun onItemClick(item: RootItemTypes) {
+    fun onItemClick(item: RootItems) {
         router.navigateTo(item.getFragment())
     }
 }

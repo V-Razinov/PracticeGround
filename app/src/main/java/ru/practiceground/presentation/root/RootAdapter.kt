@@ -1,7 +1,6 @@
 package ru.practiceground.presentation.root
 
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import ru.practiceground.R
 import ru.practiceground.databinding.ItemRootBinding
@@ -10,7 +9,7 @@ import ru.practiceground.other.getBinding
 class RootAdapter : RecyclerView.Adapter<RootAdapter.Item>() {
 
     private var items = emptyList<RootItem>()
-    private var onItemClickAction: (RootItemTypes) -> Unit = { }
+    private var onItemClickAction: (RootItems) -> Unit = { }
 
     override fun getItemCount() = items.size
 
@@ -28,7 +27,7 @@ class RootAdapter : RecyclerView.Adapter<RootAdapter.Item>() {
         notifyDataSetChanged()
     }
 
-    fun setItemClickAction(onItemClickAction: (RootItemTypes) -> Unit) {
+    fun setItemClickAction(onItemClickAction: (RootItems) -> Unit) {
         this.onItemClickAction = onItemClickAction
         notifyDataSetChanged()
     }

@@ -3,10 +3,12 @@ package ru.practiceground.presentation.drawer
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
 import kotlinx.android.synthetic.main.fragment_drawer.*
 import ru.practiceground.R
@@ -32,11 +34,24 @@ class DrawerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        drawer_tb.setNavigationOnClickListener { drawer_dl.openDrawer(GravityCompat.START) }
-        drawer_tb.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.drawer_tb_menu) drawer_dl.openDrawer(GravityCompat.END)
-            item.itemId == R.id.drawer_tb_menu
+        drawer_tb.apply {
+            setNavigationOnClickListener { drawer_dl.openDrawer(GravityCompat.START) }
+            setOnMenuItemClickListener { item ->
+                if (item.itemId == R.id.drawer_tb_menu) drawer_dl.openDrawer(GravityCompat.END)
+                item.itemId == R.id.drawer_tb_menu
+            }
         }
+        drawer_dl.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerOpened(drawerView: View) = Unit
+            override fun onDrawerClosed(drawerView: View) = Unit
+            override fun onDrawerStateChanged(newState: Int) = Unit
+
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                drawer_content.translationX = drawerView.width * slideOffset * drawer_dl.run {
+                    if (isDrawerVisible(GravityCompat.START)) 1 else -1
+                }
+            }
+        })
         drawer_nav_view.setOnMenuItemClickListener(viewModel::onMenuClick)
         drawer_nav_view2.setOnMenuItemClickListener(viewModel::onMenuClick)
     }
