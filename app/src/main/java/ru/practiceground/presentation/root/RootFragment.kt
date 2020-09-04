@@ -35,7 +35,7 @@ class RootFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         lm = GridLayoutManager(context, 3)
 
-        root_rv.apply {
+        binding.rootRv.apply {
             adapter = rootAdapter.apply { setItemClickAction(viewModel::onItemClick) }
             layoutManager = lm
         }

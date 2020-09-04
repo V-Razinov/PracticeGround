@@ -34,6 +34,7 @@ class DragToShowActionsLayout : ConstraintLayout {
 
     private var panelCenterMinX: Float = 0f
     private var panelCenterMaxX: Float = 0f
+    private var panelCenterDefaultX: Float = 0f
 
     private var isInited = false
 
@@ -50,6 +51,7 @@ class DragToShowActionsLayout : ConstraintLayout {
 
         panelCenterMaxX = panelStart.x1
         panelCenterMinX = panelStart.x0 - panelEnd.width
+        panelCenterDefaultX = panelStart.x
 
         setCenterPanelTouchListener()
         isInited = true
@@ -219,7 +221,7 @@ class DragToShowActionsLayout : ConstraintLayout {
     private fun moveCenterPanel(direction: MoveDirections, animate: Boolean = true) {
         val toX: Float = when (direction) {
             MoveDirections.LEFT -> panelCenterMinX
-            MoveDirections.CENTER -> 0f
+            MoveDirections.CENTER -> panelCenterDefaultX
             MoveDirections.RIGHT -> panelCenterMaxX
         }
         if (animate) {
