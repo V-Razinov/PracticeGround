@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="grey">#756E6E</color>
-    <color name="whiteFFF">#FFFFFF</color>
-    <color name="blue728">#7289da</color>
-    <color name="grey995">#99aab5</color>
     <color name="black223">#2c2f33</color>
     <color name="black232">#23272a</color>
     <color name="black232_50_transparent">#5023272a</color>
+    <color name="blue728">#7289da</color>
+
+    <color name="grey">#756E6E</color>
+    <color name="grey995">#99aab5</color>
+
+    <color name="whiteFFF">#FFFFFF</color>
 </resources>

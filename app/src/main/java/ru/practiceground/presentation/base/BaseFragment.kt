@@ -1,19 +1,21 @@
 package ru.practiceground.presentation.base
 
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import ru.practiceground.R
+import ru.practiceground.other.getColor
 
 abstract class BaseFragment : Fragment() {
 
     abstract val viewModel: BaseViewModel
     abstract val bgDrawable: Drawable?
+    protected val defaultBgColor = ColorDrawable(getColor(R.color.whiteFFF))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +43,11 @@ abstract class BaseFragment : Fragment() {
         viewModel.onStop()
     }
 
-    protected fun <T>MutableLiveData<T>.setObserver(action: (T) -> Unit) {
+    protected fun <T> MutableLiveData<T>.setObserver(action: (T) -> Unit) {
+        observe(viewLifecycleOwner, Observer(action::invoke))
+    }
+
+    protected fun <T> LiveData<T>.setObserver(action: (T) -> Unit) {
         observe(viewLifecycleOwner, Observer(action::invoke))
     }
 

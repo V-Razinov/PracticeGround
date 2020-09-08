@@ -9,8 +9,6 @@ class Router {
     private lateinit var finishActivity: () -> Unit
     private var containerId: Int = -1
 
-    private val size get() = fragmentManager.fragments.size
-
     fun init(fragmentManager: FragmentManager, containerId: Int, finishActivity: () -> Unit) {
         this.fragmentManager = fragmentManager
         this.finishActivity = finishActivity
@@ -19,9 +17,9 @@ class Router {
 
     fun navigateTo(fragment: BaseFragment) {
         fragmentManager.beginTransaction()
-                .replace(containerId, fragment)
-                .addToBackStack(null)
-                .commit()
+            .replace(containerId, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     fun back() {

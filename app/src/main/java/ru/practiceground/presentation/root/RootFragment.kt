@@ -22,7 +22,6 @@ class RootFragment : BaseFragment() {
 
     private val rootAdapter = RootAdapter()
     private lateinit var binding: RootFragmentBinding
-    private lateinit var lm: GridLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = getBinding(container, R.layout.root_fragment)
@@ -33,17 +32,16 @@ class RootFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lm = GridLayoutManager(context, 3)
 
         binding.rootRv.apply {
             adapter = rootAdapter.apply { setItemClickAction(viewModel::onItemClick) }
-            layoutManager = lm
+            layoutManager = GridLayoutManager(context, 3)
         }
 
         subscribe()
     }
 
-    fun subscribe() {
+    private fun subscribe() {
         viewModel.apply {
             items.setObserver(rootAdapter::setItems)
         }

@@ -13,5 +13,6 @@ enum class RootItems(val title: String, val getFragment: () -> BaseFragment) {
     EXPANDABLE_RECYCLER("Expandable Recycler", Screens::expandableRecView::get),
     ALL_IN_ONE("Swipe To Show Action", Screens::swipeToShowAction::get),
     FINGERPRINT("FingerPrint", Screens::fingerprint::get),
-    DRAWER("Drawer", Screens::drawer::get)
+    DRAWER("Drawer", Screens::drawer::get),
+    VIEWPAGER("ViewPager2 + Room + liveData", Screens::viewPager::get)
 }

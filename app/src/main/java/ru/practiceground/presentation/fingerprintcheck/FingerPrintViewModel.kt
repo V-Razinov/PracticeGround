@@ -27,7 +27,7 @@ class FingerPrintViewModel : BaseViewModel() {
                         }
                         override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                             super.onAuthenticationError(errorCode, errString)
-                            fingerPrintStatus.value = "Error"
+                            fingerPrintStatus.value = "Canceled"
                         }
                         override fun onAuthenticationFailed() {
                             super.onAuthenticationFailed()

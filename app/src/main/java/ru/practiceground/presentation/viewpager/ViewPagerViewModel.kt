@@ -1,0 +1,23 @@
+package ru.practiceground.presentation.viewpager
+
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.practiceground.App
+import ru.practiceground.data.room.LikeableDataBase
+import ru.practiceground.data.room.entity.LikeableEntity
+import ru.practiceground.data.room.repos.LikeableRepository
+import ru.practiceground.presentation.base.BaseViewModel
+
+class ViewPagerViewModel : BaseViewModel() {
+
+    private val repository: LikeableRepository by lazy {
+        LikeableRepository(LikeableDataBase.getInstance(App.context, viewModelScope).likeableDao())
+    }
+
+    fun onAddClick(text: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insert(LikeableEntity(text = text))
+        }
+    }
+}
