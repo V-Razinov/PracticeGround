@@ -6,6 +6,7 @@ import ru.practiceground.presentation.swipetoshowaction.SwipeFragment
 import ru.practiceground.presentation.expandablerecycler.ExpandableRecyclerFragment
 import ru.practiceground.presentation.fingerprintcheck.FingerPrintFragment
 import ru.practiceground.presentation.root.RootFragment
+import ru.practiceground.presentation.viewpager.ViewPagerFragment
 
 object Screens {
 
@@ -15,4 +16,5 @@ object Screens {
     val swipeToShowAction get() = SwipeFragment()
     val fingerprint get() = FingerPrintFragment()
     val drawer get() = DrawerFragment()
+    val viewPager get() = ViewPagerFragment()
 }
