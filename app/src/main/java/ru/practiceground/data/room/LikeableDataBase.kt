@@ -25,9 +25,7 @@ abstract class LikeableDataBase : RoomDatabase() {
                     context,
                     LikeableDataBase::class.java,
                     TABLE_NAME_LIKEABLE
-                )
-                    .addCallback(LikeableCallBack(scope))
-                    .build()
+                ).addCallback(LikeableCallBack(scope)).build()
                 INSTANCE!!
             }
         }
@@ -36,13 +34,10 @@ abstract class LikeableDataBase : RoomDatabase() {
     private class LikeableCallBack(private val scope: CoroutineScope) : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            INSTANCE?.let {
+            INSTANCE?.let { instance ->
                 scope.launch(Dispatchers.IO) {
-                    it.likeableDao().apply {
-                        listOf(
-                            LikeableEntity(text = "Puppies"),
-                            LikeableEntity(text = "Kitties")
-                        ).forEach { insert(it) }
+                    repeat(150) { index ->
+                        instance.likeableDao().insert(LikeableEntity(text = "$index SampleText"))
                     }
                 }
             }
@@ -50,13 +45,10 @@ abstract class LikeableDataBase : RoomDatabase() {
 
         override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
             super.onDestructiveMigration(db)
-            INSTANCE?.let {
+            INSTANCE?.let { instance ->
                 scope.launch(Dispatchers.IO) {
-                    it.likeableDao().apply {
-                        listOf(
-                            LikeableEntity(text = "Puppies"),
-                            LikeableEntity(text = "Kitties")
-                        ).forEach { insert(it) }
+                    repeat(150) { index ->
+                        instance.likeableDao().insert(LikeableEntity(text = "$index SampleText"))
                     }
                 }
             }

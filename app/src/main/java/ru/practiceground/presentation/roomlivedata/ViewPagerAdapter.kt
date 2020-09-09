@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.practiceground.presentation.roomlivedata.pages.all.PageAllFragment
 import ru.practiceground.presentation.roomlivedata.pages.favs.PageFavsFragment
 
-class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class ViewPagerAdapter(parentFragment: Fragment) : FragmentStateAdapter(parentFragment) {
 
     private val fragments = listOf(PageAllFragment(), PageFavsFragment())
 
