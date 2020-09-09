@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="ru.practiceground.presentation.viewpager.pages.favs.PageFavsViewModel" />
+            type="ru.practiceground.presentation.roomlivedata.pages.favs.PageFavsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

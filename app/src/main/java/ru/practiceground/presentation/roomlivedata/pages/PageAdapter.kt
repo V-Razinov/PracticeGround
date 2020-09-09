@@ -1,18 +1,23 @@
-package ru.practiceground.presentation.viewpager.pages
+package ru.practiceground.presentation.roomlivedata.pages
 
+import android.os.Handler
+import android.os.Looper
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.practiceground.R
 import ru.practiceground.databinding.ItemLikeUnlikeBinding
 import ru.practiceground.other.getBinding
-import ru.practiceground.presentation.viewpager.ClickHandler
-import ru.practiceground.presentation.viewpager.LikeableItem
+import ru.practiceground.presentation.roomlivedata.ClickHandler
+import ru.practiceground.presentation.roomlivedata.LikeableItem
+import java.util.concurrent.Executors
 
 class PageAdapter : RecyclerView.Adapter<PageAdapter.Holder>() {
 
-    private val items = mutableListOf<LikeableItem>()
-    private var onLikeClickAction: (LikeableItem) -> Unit = {}
+    private var items = emptyList<LikeableItem>()
     private var clickHandler = ClickHandler.empty()
+    private val executor = Executors.newSingleThreadExecutor()
+    private val mainThreadHandler = Handler(Looper.getMainLooper())
 
     override fun getItemCount(): Int = items.size
 
@@ -24,16 +29,9 @@ class PageAdapter : RecyclerView.Adapter<PageAdapter.Holder>() {
         holder.bind(items[position])
     }
 
-    fun setItems(items: List<LikeableItem>) {
-        this.items.apply {
-            clear()
-            addAll(items)
-        }
-        notifyDataSetChanged()
-    }
-
-    fun setOnLikeClickAction(action: (LikeableItem) -> Unit) {
-        onLikeClickAction = action
+    fun setItems(newItems: List<LikeableItem>, diffs: DiffUtil.DiffResult) {
+        items = newItems
+        diffs.dispatchUpdatesTo(this)
     }
 
     fun setClickHandler(handler: ClickHandler) {

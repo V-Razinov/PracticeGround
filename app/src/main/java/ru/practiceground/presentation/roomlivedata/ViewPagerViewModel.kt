@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.viewpager
+package ru.practiceground.presentation.roomlivedata
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers

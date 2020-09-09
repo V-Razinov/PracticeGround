@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.viewpager.pages.favs
+package ru.practiceground.presentation.roomlivedata.pages.favs
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -12,7 +12,7 @@ import ru.practiceground.R
 import ru.practiceground.databinding.FragmentPageFavsBinding
 import ru.practiceground.other.getBinding
 import ru.practiceground.presentation.base.BaseFragment
-import ru.practiceground.presentation.viewpager.pages.PageAdapter
+import ru.practiceground.presentation.roomlivedata.pages.PageAdapter
 
 class PageFavsFragment : BaseFragment() {
 
@@ -35,9 +35,9 @@ class PageFavsFragment : BaseFragment() {
             adapter = this@PageFavsFragment.adapter
         }
 
-        viewModel.items.setObserver {
-            adapter.setItems(it)
-            binding.image.isVisible = it.isEmpty()
+        viewModel.items.setObserver { (items, callback) ->
+            adapter.setItems(items, callback)
+            binding.image.isVisible = items.isEmpty()
         }
         viewModel.clickHandler.setObserver(adapter::setClickHandler)
     }

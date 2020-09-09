@@ -6,7 +6,7 @@ import ru.practiceground.presentation.swipetoshowaction.SwipeFragment
 import ru.practiceground.presentation.expandablerecycler.ExpandableRecyclerFragment
 import ru.practiceground.presentation.fingerprintcheck.FingerPrintFragment
 import ru.practiceground.presentation.root.RootFragment
-import ru.practiceground.presentation.viewpager.ViewPagerFragment
+import ru.practiceground.presentation.roomlivedata.ViewPagerFragment
 
 object Screens {
 

@@ -1,8 +1,7 @@
-package ru.practiceground.presentation.viewpager
+package ru.practiceground.presentation.roomlivedata
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator

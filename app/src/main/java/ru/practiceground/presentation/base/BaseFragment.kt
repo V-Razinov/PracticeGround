@@ -44,11 +44,11 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun <T> MutableLiveData<T>.setObserver(action: (T) -> Unit) {
-        observe(viewLifecycleOwner, Observer(action::invoke))
+        observe(viewLifecycleOwner, Observer(action))
     }
 
     protected fun <T> LiveData<T>.setObserver(action: (T) -> Unit) {
-        observe(viewLifecycleOwner, Observer(action::invoke))
+        observe(viewLifecycleOwner, Observer(action))
     }
 
     private fun setBgDrawable() {

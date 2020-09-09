@@ -1,4 +1,4 @@
-package ru.practiceground.presentation.viewpager.pages.all
+package ru.practiceground.presentation.roomlivedata.pages.all
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -12,7 +12,7 @@ import ru.practiceground.R
 import ru.practiceground.databinding.FragmentPageAllBinding
 import ru.practiceground.other.getBinding
 import ru.practiceground.presentation.base.BaseFragment
-import ru.practiceground.presentation.viewpager.pages.PageAdapter
+import ru.practiceground.presentation.roomlivedata.pages.PageAdapter
 
 class PageAllFragment : BaseFragment() {
 
@@ -35,9 +35,9 @@ class PageAllFragment : BaseFragment() {
             adapter = this@PageAllFragment.adapter
         }
 
-        viewModel.items.setObserver {
-            adapter.setItems(it)
-            binding.image.isVisible = it.isEmpty()
+        viewModel.items.setObserver { (items, diffs) ->
+            adapter.setItems(items, diffs)
+            binding.image.isVisible = items.isEmpty()
         }
         viewModel.clickHandler.setObserver(adapter::setClickHandler)
     }

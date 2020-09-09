@@ -7,11 +7,11 @@
 
         <variable
             name="data"
-            type="ru.practiceground.presentation.viewpager.LikeableItem" />
+            type="ru.practiceground.presentation.roomlivedata.LikeableItem" />
 
         <variable
             name="clickHandler"
-            type="ru.practiceground.presentation.viewpager.ClickHandler" />
+            type="ru.practiceground.presentation.roomlivedata.ClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

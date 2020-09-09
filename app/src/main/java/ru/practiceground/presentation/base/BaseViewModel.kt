@@ -14,7 +14,6 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val router = App.router
     protected val context get() = App.context
-    protected val scope = viewModelScope
 
     open fun onViewCreated() { }
 
@@ -26,7 +25,7 @@ abstract class BaseViewModel : ViewModel() {
 
     open fun onStop() { }
 
-    protected fun getString(@StringRes id: Int) = context.getString(id)
+    protected fun getString(@StringRes id: Int, vararg formatArgs: String) = context.getString(id, *formatArgs)
 
     protected fun showMessage(@StringRes id: Int) {
         Toast.makeText(context, getString(id), Toast.LENGTH_LONG).show()

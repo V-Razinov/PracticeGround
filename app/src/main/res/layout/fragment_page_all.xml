@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="ru.practiceground.presentation.viewpager.pages.all.PageAllViewModel" />
+            type="ru.practiceground.presentation.roomlivedata.pages.all.PageAllViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
