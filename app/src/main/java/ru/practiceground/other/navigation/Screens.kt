@@ -1,5 +1,6 @@
 package ru.practiceground.other.navigation
 
+import ru.practiceground.presentation.custommessages.CustomMessagesFragment
 import ru.practiceground.presentation.discord.DiscordFragment
 import ru.practiceground.presentation.drawer.DrawerFragment
 import ru.practiceground.presentation.swipetoshowaction.SwipeFragment
@@ -17,4 +18,5 @@ object Screens {
     val fingerprint get() = FingerPrintFragment()
     val drawer get() = DrawerFragment()
     val viewPager get() = ViewPagerFragment()
+    val customMessages get() = CustomMessagesFragment()
 }

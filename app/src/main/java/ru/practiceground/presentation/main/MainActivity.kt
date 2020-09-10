@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val binding: MainActivityBinding = MainActivityBinding.inflate(layoutInflater)
         binding.vm = viewModel
         setContentView(binding.root)
-        viewModel.onCreate(supportFragmentManager, R.id.container, ::finish)
+        viewModel.onCreate(supportFragmentManager, binding.container.id, ::finish)
     }
 
     override fun onBackPressed() {

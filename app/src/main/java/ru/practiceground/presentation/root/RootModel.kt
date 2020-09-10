@@ -14,5 +14,6 @@ enum class RootItems(val title: String, val getFragment: () -> BaseFragment) {
     ALL_IN_ONE("Swipe To Show Action", Screens::swipeToShowAction::get),
     FINGERPRINT("FingerPrint", Screens::fingerprint::get),
     DRAWER("Drawer", Screens::drawer::get),
-    VIEWPAGER("ViewPager2 + Room + liveData", Screens::viewPager::get)
+    VIEWPAGER("ViewPager2 + Room + liveData", Screens::viewPager::get),
+    CUSTOM_MESSAGES("Custom messages(Toast + SnackBar)", Screens::customMessages::get)
 }

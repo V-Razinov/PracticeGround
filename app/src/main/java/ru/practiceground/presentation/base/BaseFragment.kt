@@ -15,7 +15,7 @@ abstract class BaseFragment : Fragment() {
 
     abstract val viewModel: BaseViewModel
     abstract val bgDrawable: Drawable?
-    protected val defaultBgColor = ColorDrawable(getColor(R.color.whiteFFF))
+    protected val defaultBgColor get() = ColorDrawable(getColor(R.color.whiteFFF))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

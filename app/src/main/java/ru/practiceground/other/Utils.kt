@@ -13,9 +13,10 @@ import androidx.databinding.ViewDataBinding
 import ru.practiceground.App
 import ru.practiceground.R
 
+//Для Парент Фрагментов и итемов ресайкла
 fun <Binding : ViewDataBinding> getBinding(parent: ViewGroup?, @LayoutRes layoutId: Int): Binding =
     DataBindingUtil.inflate(LayoutInflater.from(parent?.context), layoutId, parent, false)
-
+//Для Чайлд фрагментов(диалоги, страницы viewpager)
 fun <Binding : ViewDataBinding> getBinding(inflater: LayoutInflater, parent: ViewGroup?, @LayoutRes layoutId: Int): Binding =
     DataBindingUtil.inflate(inflater, layoutId, parent, false)
 

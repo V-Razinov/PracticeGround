@@ -35,11 +35,4 @@ class Router {
         }
         navigateTo(fragment)
     }
-
-    fun replace(fragment: BaseFragment) {
-        fragmentManager.beginTransaction()
-            .replace(containerId, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
 }

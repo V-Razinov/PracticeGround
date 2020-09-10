@@ -37,8 +37,6 @@ class ExpandableRecyclerFragment : BaseFragment() {
             adapter = this@ExpandableRecyclerFragment.adapter
         }
 
-        viewModel.items.setObserver {
-            adapter.items = it
-        }
+        viewModel.items.setObserver(adapter::items::set)
     }
 }

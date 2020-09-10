@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.root_fragment.*
 import ru.practiceground.R
 import ru.practiceground.databinding.RootFragmentBinding
@@ -20,7 +22,9 @@ class RootFragment : BaseFragment() {
     override val viewModel: RootViewModel by viewModels()
     override val bgDrawable: Drawable? = ColorDrawable(getColor(R.color.whiteFFF))
 
-    private val rootAdapter = RootAdapter()
+    private val rootAdapter: RootAdapter by lazy {
+        RootAdapter().apply { setItemClickAction(viewModel::onItemClick) }
+    }
     private lateinit var binding: RootFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,8 +38,8 @@ class RootFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rootRv.apply {
-            adapter = rootAdapter.apply { setItemClickAction(viewModel::onItemClick) }
-            layoutManager = GridLayoutManager(context, 3)
+            adapter = rootAdapter
+            layoutManager = StaggeredGridLayoutManager(3, RecyclerView.VERTICAL)
         }
 
         subscribe()
