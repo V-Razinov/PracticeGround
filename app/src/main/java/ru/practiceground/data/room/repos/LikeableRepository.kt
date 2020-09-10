@@ -20,8 +20,8 @@ class LikeableRepository(private val likeableDao: LikeableDao) {
     private fun mapToLikeableItem(items: List<LikeableEntity>) = items.map(::LikeableItem)
 
     private val config: PagedList.Config get() = Config(
-        pageSize = 10,
-        prefetchDistance = 10,
+        pageSize = 20,
+        prefetchDistance = 40,
         enablePlaceholders = false,
         initialLoadSizeHint = 20
     )

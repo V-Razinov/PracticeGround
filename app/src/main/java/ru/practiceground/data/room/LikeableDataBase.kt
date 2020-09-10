@@ -47,6 +47,7 @@ abstract class LikeableDataBase : RoomDatabase() {
             super.onDestructiveMigration(db)
             INSTANCE?.let { instance ->
                 scope.launch(Dispatchers.IO) {
+                    instance.likeableDao().clear()
                     repeat(150) { index ->
                         instance.likeableDao().insert(LikeableEntity(text = "$index SampleText"))
                     }
