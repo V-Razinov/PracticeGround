@@ -1,12 +1,12 @@
-package ru.practiceground.presentation.viewpager
+package ru.practiceground.presentation.roomlivedata
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import ru.practiceground.presentation.viewpager.pages.all.PageAllFragment
-import ru.practiceground.presentation.viewpager.pages.favs.PageFavsFragment
+import ru.practiceground.presentation.roomlivedata.pages.all.PageAllFragment
+import ru.practiceground.presentation.roomlivedata.pages.favs.PageFavsFragment
 
-class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class ViewPagerAdapter(parentFragment: Fragment) : FragmentStateAdapter(parentFragment) {
 
     private val fragments = listOf(PageAllFragment(), PageFavsFragment())
 

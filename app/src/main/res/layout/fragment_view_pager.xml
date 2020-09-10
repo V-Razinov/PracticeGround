@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="ru.practiceground.presentation.viewpager.ViewPagerViewModel" />
+            type="ru.practiceground.presentation.roomlivedata.ViewPagerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

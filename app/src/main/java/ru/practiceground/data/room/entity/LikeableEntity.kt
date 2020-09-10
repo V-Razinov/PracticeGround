@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.practiceground.data.room.*
-import ru.practiceground.presentation.viewpager.LikeableItem
+import ru.practiceground.presentation.roomlivedata.LikeableItem
 
 @Entity(tableName = TABLE_NAME_LIKEABLE)
 data class LikeableEntity(
