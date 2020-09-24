@@ -1,0 +1,129 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true">
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/player_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black223"
+        app:layout_constraintDimensionRatio="4:3"
+        app:use_controller="false" />
+
+    <LinearLayout
+        android:id="@+id/time_lines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/avatar_card"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_lines">
+
+        <ImageView
+            android:id="@+id/avatar_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Четкие приколы"
+        android:textColor="@color/whiteFFF"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toStartOf="@+id/close_iv"
+        app:layout_constraintStart_toEndOf="@+id/avatar_card"
+        app:layout_constraintTop_toTopOf="@+id/avatar_card" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="yesterday at 18:18"
+        android:textColor="@color/whiteFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/author"
+        app:layout_constraintTop_toBottomOf="@+id/author" />
+
+    <ImageView
+        android:id="@+id/close_iv"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_round_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_lines"
+        app:layout_constraintTop_toTopOf="@id/avatar_card" />
+
+    <TextView
+        android:id="@+id/camera_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_rect_stroked_16"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        app:drawableStartCompat="@drawable/ic_round_photo_camera_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="5" />
+
+    <TextView
+        android:id="@+id/go_to_store"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_rect_filled_16"
+        android:gravity="center"
+        android:text="Go to store"
+        app:layout_constraintBaseline_toBaselineOf="@id/camera_iv"
+        app:layout_constraintEnd_toStartOf="@+id/resend_iv"
+        app:layout_constraintStart_toEndOf="@+id/camera_iv" />
+
+    <ImageView
+        android:id="@+id/resend_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_oval_stroked_16"
+        android:src="@drawable/ic_round_reply_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/more_iv"
+        app:tint="@color/whiteFFF" />
+
+    <ImageView
+        android:id="@+id/more_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_oval_stroked_16"
+        android:src="@drawable/ic_round_more_horiz_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/whiteFFF" />
+</androidx.constraintlayout.widget.ConstraintLayout>

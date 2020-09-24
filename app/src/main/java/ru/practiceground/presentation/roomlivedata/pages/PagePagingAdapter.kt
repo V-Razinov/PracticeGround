@@ -29,8 +29,9 @@ class PagePagingAdapter: PagedListAdapter<LikeableItem, PagePagingAdapter.Holder
     }
 
     override fun getItemCount(): Int {
-        onItemCountChangedAction(super.getItemCount())
-        return super.getItemCount()
+        val count = super.getItemCount()
+        onItemCountChangedAction(count)
+        return count
     }
 
     fun setOnItemsCountChangedAction(action: (Int) -> Unit) {

@@ -16,7 +16,6 @@ import ru.practiceground.R
 import ru.practiceground.databinding.FragmentPageFavsBinding
 import ru.practiceground.other.getBinding
 import ru.practiceground.presentation.base.BaseFragment
-import ru.practiceground.presentation.roomlivedata.pages.PageAdapter
 import ru.practiceground.presentation.roomlivedata.pages.PagePagingAdapter
 
 class PageFavsFragment : BaseFragment() {

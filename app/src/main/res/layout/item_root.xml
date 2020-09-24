@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:elevation="4dp"
-        app:cardBackgroundColor="@color/grey"
+        android:foreground="?android:selectableItemBackground"
+        app:cardBackgroundColor="@color/design_default_color_primary"
         app:cardCornerRadius="10dp"
         app:contentPadding="16dp">
 
@@ -26,6 +27,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@{item}"
+            android:textColor="@color/whiteFFF"
             tools:text="qweqweqweqweqwe" />
     </androidx.cardview.widget.CardView>
 </layout>
