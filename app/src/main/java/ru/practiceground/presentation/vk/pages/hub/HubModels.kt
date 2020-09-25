@@ -6,6 +6,13 @@ import ru.practiceground.R
 import java.lang.Exception
 
 internal const val VIEW_TYPE_CATEGORIES = 0
+internal const val VIEW_TYPE_MINI_APPS = 1
+internal const val VIEW_TYPE_DATE = 2
+internal const val VIEW_TYPE_TAXI = 3
+internal const val VIEW_TYPE_APPS = 4
+internal const val VIEW_TYPE_SPORTS = 5
+internal const val VIEW_TYPE_EXCHANGE = 6
+internal const val VIEW_TYPE_GAMES = 7
 
 abstract class HubBaseItem(val viewType: Int)
 
@@ -14,12 +21,38 @@ class CategoriesItem(
     val previewCount: Int,
     val onCategoryClick: (Category) -> Unit,
     var isExpanded: Boolean = false,
-    val miniApps: List<MiniApp>,
-    val onMiniAppCLick: (MiniApp) -> Unit,
-    val onMoreMiniAppsClick: () -> Unit,
 ) : HubBaseItem(VIEW_TYPE_CATEGORIES) {
     init { if (previewCount >= categories.size) throw Exception() }
 }
+
+class MiniAppsItem(
+    val miniApps: List<MiniApp>,
+    val onMiniAppCLick: (MiniApp) -> Unit,
+    val onMoreMiniAppsClick: () -> Unit
+) : HubBaseItem(VIEW_TYPE_MINI_APPS)
+
+class DateItem(
+    val day: String,
+    val date: String
+) : HubBaseItem(VIEW_TYPE_DATE)
+
+class TaxiItem(
+    val onTaxiClick: () -> Unit,
+    val onAllowGeoClick: () -> Unit
+) : HubBaseItem(VIEW_TYPE_TAXI)
+
+class AppsItem(
+    @DrawableRes val image : Int = R.drawable.ic_round_apps_24,
+    val apps: List<MiniApp>,
+    val onAppCLick: (MiniApp) -> Unit,
+    val onAppClick: () -> Unit
+) : HubBaseItem(VIEW_TYPE_APPS)
+
+class SportsItem(): HubBaseItem(VIEW_TYPE_SPORTS)
+
+class ExchangeItem() : HubBaseItem(VIEW_TYPE_EXCHANGE)
+
+class GamesItem() : HubBaseItem(VIEW_TYPE_GAMES)
 
 enum class Category(val text: String, @DrawableRes val drawableId: Int, @ColorRes val colorId: Int) {
     FRIENDS(     "Friends",      R.drawable.ic_round_people_outline_24,      R.color.red354),
