@@ -12,7 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import ru.practiceground.App
 import ru.practiceground.R
+import java.io.InputStream
+import java.io.OutputStream
 
+private const val COPY_STREAM_BYTE_ARRAY_SIZE = 1024 * 2
 //Для Парент Фрагментов и итемов ресайкла
 fun <Binding : ViewDataBinding> getBinding(parent: ViewGroup?, @LayoutRes layoutId: Int): Binding =
     DataBindingUtil.inflate(LayoutInflater.from(parent?.context), layoutId, parent, false)
@@ -32,3 +35,15 @@ fun getDialogPadding(context: Context): Int {
     else
         0
 }
+
+fun copyStream(inputStream: InputStream, outputStream: OutputStream) {
+    val fileReader = ByteArray(COPY_STREAM_BYTE_ARRAY_SIZE)
+    while (true) {
+        val read: Int = inputStream.read(fileReader)
+        if (read == -1) break
+        outputStream.write(fileReader, 0, read)
+    }
+    outputStream.flush()
+}
+
+inline fun <reified T> Any?.castTo(): T? = this as? T

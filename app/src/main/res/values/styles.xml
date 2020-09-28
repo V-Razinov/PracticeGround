@@ -5,6 +5,20 @@
         <item name="snackbarStyle">@style/Widget.MaterialComponents.Snackbar.FullWidth</item>
     </style>
 
+    <style name="PopupMenuTheme" parent="@android:style/Widget.PopupMenu">
+        <item name="android:textColor">@color/whiteFFF</item>
+        <item name="android:popupBackground">@drawable/background_rect_stroked_16</item>
+        <item name="android:backgroundTint">@color/black223</item>
+    </style>
+
+    <style name="CreatePostDialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowEnterAnimation">@anim/fragment_fade_enter</item>
+        <item name="android:windowExitAnimation">@anim/fragment_close_exit</item>
+    </style>
+
     <style name="Drawer">
         <item name="android:textColorSecondary">@color/blue728</item>
     </style>
@@ -16,5 +30,61 @@
     <style name="roundedImageViewRounded">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="NewsPostBottomActionView">
+        <item name="android:clickable">false</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawableTint">@color/grey</item>
+    </style>
+
+    <style name="CreatePostStrokedItem">
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:drawableTint">@color/grey</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CreatePostImageView">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:tint">@color/grey</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
+    <style name="HubCard">
+        <item name="android:paddingTop">16dp</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardBackgroundColor">@color/grey707</item>
+        <item name="cardElevation">0dp</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
+    </style>
+
+    <style name="HubCardImageCard">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="cardCornerRadius">6dp</item>
+    </style>
+
+    <style name="HubCardImage">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
+    <style name="HubCardTitle">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey995</item>
+    </style>
+
+    <style name="HubCardArrowRight">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:backgroundTint">@color/grey</item>
+        <item name="android:layout_marginEnd">16dp</item>
     </style>
 </resources>

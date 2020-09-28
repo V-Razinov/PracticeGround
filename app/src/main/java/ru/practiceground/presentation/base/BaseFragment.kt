@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import ru.practiceground.R
+import ru.practiceground.other.base.SingleLiveEvent
 import ru.practiceground.other.getColor
 
 abstract class BaseFragment : Fragment() {
@@ -47,11 +48,15 @@ abstract class BaseFragment : Fragment() {
         observe(viewLifecycleOwner, Observer(action))
     }
 
+    protected fun <T> SingleLiveEvent<T>.setObserver(action: (T) -> Unit) {
+        observe(viewLifecycleOwner, Observer { action.invoke(it ?: return@Observer) })
+    }
+
     protected fun <T> LiveData<T>.setObserver(action: (T) -> Unit) {
         observe(viewLifecycleOwner, Observer(action))
     }
 
     private fun setBgDrawable() {
-        activity?.window?.setBackgroundDrawable(bgDrawable)
+        bgDrawable?.let { bgDrawable -> activity?.window?.setBackgroundDrawable(bgDrawable) }
     }
 }

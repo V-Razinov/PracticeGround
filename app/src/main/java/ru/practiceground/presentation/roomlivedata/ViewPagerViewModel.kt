@@ -11,9 +11,8 @@ import ru.practiceground.presentation.base.BaseViewModel
 
 class ViewPagerViewModel : BaseViewModel() {
 
-    private val repository: LikeableRepository by lazy {
-        LikeableRepository(LikeableDataBase.getInstance(App.context, viewModelScope).likeableDao())
-    }
+    private val repository =
+        LikeableRepository.getInstance(LikeableDataBase.getInstance(App.context, viewModelScope).likeableDao())
 
     fun onAddClick(text: String, currentItem: Int) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -9,13 +9,22 @@ import ru.practiceground.data.room.dao.LikeableDao
 import ru.practiceground.data.room.entity.LikeableEntity
 import ru.practiceground.presentation.roomlivedata.LikeableItem
 
-class LikeableRepository(private val likeableDao: LikeableDao) {
+class LikeableRepository private constructor(private val likeableDao: LikeableDao) {
 
-    val allPaging: LiveData<PagedList<LikeableItem>> = likeableDao.getAllPaging().map(::LikeableItem).toLiveData(config)
-    val favsPaging: LiveData<PagedList<LikeableItem>> = likeableDao.getFavsPaging().map(::LikeableItem).toLiveData(config)
+    companion object {
+        private var instance: LikeableRepository? = null
 
-    val all: LiveData<List<LikeableItem>> = Transformations.map(likeableDao.getAll(), ::mapToLikeableItem)
-    val favs: LiveData<List<LikeableItem>> = Transformations.map(likeableDao.getFavs(), ::mapToLikeableItem)
+        fun getInstance(likeableDao: LikeableDao): LikeableRepository = instance ?: synchronized(this) {
+            instance = LikeableRepository(likeableDao = likeableDao)
+            instance!!
+        }
+    }
+
+    val allPaging: LiveData<PagedList<LikeableItem>> by lazy { likeableDao.getAllPaging().map(::LikeableItem).toLiveData(config) }
+    val favsPaging: LiveData<PagedList<LikeableItem>> by lazy { likeableDao.getFavsPaging().map(::LikeableItem).toLiveData(config) }
+
+    val all: LiveData<List<LikeableItem>> by lazy { Transformations.map(likeableDao.getAll(), ::mapToLikeableItem) }
+    val favs: LiveData<List<LikeableItem>> by lazy { Transformations.map(likeableDao.getFavs(), ::mapToLikeableItem) }
 
     private fun mapToLikeableItem(items: List<LikeableEntity>) = items.map(::LikeableItem)
 
