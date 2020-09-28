@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/HubCard"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/HubCard"
@@ -16,14 +16,15 @@
             style="@style/HubCardImageCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/blue728"
+            app:cardBackgroundColor="@color/green2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/taxi_image"
                 style="@style/HubCardImage"
-                tools:src="@drawable/ic_round_apps_24" />
+                android:scaleType="center"
+                android:src="@drawable/ic_round_local_taxi_24" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -31,10 +32,10 @@
             style="@style/HubCardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="VK TAXI"
             app:layout_constraintBottom_toBottomOf="@+id/taxi_card"
             app:layout_constraintStart_toEndOf="@+id/taxi_card"
-            app:layout_constraintTop_toTopOf="@+id/taxi_card"
-            tools:text="VK TAXI" />
+            app:layout_constraintTop_toTopOf="@+id/taxi_card" />
 
         <View
             style="@style/HubCardArrowRight"
@@ -53,6 +54,7 @@
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:text="Allow access to your location and call a taxi in just one tap"
+            android:textColor="@color/grey"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/taxi_card" />
 
@@ -65,8 +67,7 @@
             android:background="@drawable/background_rect_stroked"
             android:backgroundTint="@color/blue728"
             android:foreground="?android:selectableItemBackground"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:padding="8dp"
             android:text="Allow access"
             android:textColor="@color/blue728"
             android:textStyle="bold"
@@ -76,7 +77,7 @@
             app:layout_constraintTop_toBottomOf="@+id/taxi_body_text" />
 
         <LinearLayout
-            android:id="@+id/taxi_end_points"
+            android:id="@+id/taxi_routes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

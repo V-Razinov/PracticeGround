@@ -33,6 +33,13 @@ class HubFragment : BaseFragment() {
             adapter = this@HubFragment.adapter
             layoutManager = LinearLayoutManager(context)
         }
-        viewModel.items.setObserver(adapter::setItems)
+        subscribe()
+    }
+
+    private fun subscribe() {
+        with(viewModel) {
+            items.setObserver(adapter::setItems)
+            notifyItemChanged.setObserver(adapter::notifyByViewType)
+        }
     }
 }

@@ -1,11 +1,14 @@
 package ru.practiceground.presentation.vk.pages.hub
 
 import android.animation.LayoutTransition
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import androidx.core.content.ContextCompat
@@ -18,6 +21,7 @@ import kotlinx.android.synthetic.main.item_hub_category.view.*
 import kotlinx.android.synthetic.main.item_hub_category.view.image
 import kotlinx.android.synthetic.main.item_mini_app.view.*
 import kotlinx.android.synthetic.main.item_mini_apps.view.*
+import kotlinx.android.synthetic.main.item_route.view.*
 import kotlinx.android.synthetic.main.item_taxi.view.*
 import ru.practiceground.R
 import ru.practiceground.other.extensions.splitBySize
@@ -38,7 +42,7 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             VIEW_TYPE_MINI_APPS -> MiniAppsHolder(getView(parent, R.layout.item_mini_apps))
             VIEW_TYPE_DATE -> DateHolder(getView(parent, R.layout.item_date))
             VIEW_TYPE_TAXI -> TaxiHolder(getView(parent, R.layout.item_taxi))
-            else -> throw Exception("qwe")//todo
+            else -> throw Exception("${HubAdapter::class.java} unknown view type")
         }
     }
 
@@ -56,8 +60,16 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         items = newItems
         notifyDataSetChanged()
     }
+    
+    fun notifyByViewType(viewType: Int) {
+        val index = items.indexOfFirst { it.viewType == viewType }
+        if (index != -1)
+            notifyItemChanged(index)
+    }
 
-    inner class CategoriesHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    @Suppress("NAME_SHADOWING")
+    @SuppressLint("InflateParams")
+    class CategoriesHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         private val inflater = LayoutInflater.from(view.context)
         private val columns = 3
@@ -97,8 +109,8 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                                 val tableRow = getTableRow(view.context).apply {
                                     layoutTransition = LayoutTransition()
                                 }
-                                it.forEach {
-                                    tableRow.addView(getCategoryView(it, item.onCategoryClick))
+                                it.forEach { category ->
+                                    tableRow.addView(getCategoryView(category, item.onCategoryClick))
                                 }
                                 if (tableRow.childCount < columns)
                                     repeat(tableRow.childCount - row.size) {
@@ -132,6 +144,7 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 setOnClickListener { onCategoryClick(category) }
             }
 
+        @SuppressLint("SetTextI18n")
         private fun getShowMoreCategoriesView(onShowMoreClick: View.() -> Unit): View =
             inflater.inflate(R.layout.item_hub_category, null).apply {
                 layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT)
@@ -159,6 +172,7 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             view.more_mini_apps.setOnClickListener { item.onMoreMiniAppsClick() }
         }
 
+        @SuppressLint("InflateParams")
         private fun getMiniAppView(miniApp: MiniApp, onMiniAppCLick: (MiniApp) -> Unit): View =
             inflater.inflate(R.layout.item_mini_app, null).apply {
                 sale.isVisible = miniApp.sale.isNotEmpty()
@@ -176,12 +190,38 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    class TaxiHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class TaxiHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(item: TaxiItem) {
-            view.setOnClickListener { item.onTaxiClick() }
-            view.taxi_allow_access.setOnClickListener { item.onAllowGeoClick() }
+            view.apply {
+                taxi_routes.removeAllViews()
+                if (item.isGeoAllowed) {
+                    taxi_allow_access.isVisible = false
+                    taxi_body_text.isVisible = false
+                    taxi_routes.isVisible = true
+                    taxi_routes.addRoutes(item.routes, item.onTaxiClick)
+                    setOnClickListener { item.onTaxiClick() }
+                } else {
+                    taxi_routes.isVisible = false
+                    taxi_body_text.isVisible = true
+                    taxi_allow_access.isVisible = true
+                    taxi_allow_access.setOnClickListener { item.onAllowGeoClick(item) }
+                }
+            }
         }
+
+        private fun LinearLayout.addRoutes(routes: List<Route>, onRouteClick: () -> Unit) {
+            val inflater = LayoutInflater.from(view.context)
+            routes.forEach { addView(getRoute(inflater, it, onRouteClick)) }
+        }
+
+        @SuppressLint("InflateParams")
+        private fun getRoute(inflater: LayoutInflater, route: Route, onRouteClick: () -> Unit) : View =
+            inflater.inflate(R.layout.item_route, null).apply {
+                item_route_name.text = route.name
+                item_route_time.text = route.time
+                setOnClickListener { onRouteClick() }
+            }
     }
 
     class AppsHolder(private val view: View) : RecyclerView.ViewHolder(view)
