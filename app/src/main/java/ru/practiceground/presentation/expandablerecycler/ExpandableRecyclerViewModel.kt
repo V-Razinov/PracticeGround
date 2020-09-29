@@ -7,8 +7,8 @@ class ExpandableRecyclerViewModel : BaseViewModel() {
 
     val items = MutableLiveData<List<MyItem>>()
 
-    override fun onViewCreated() {
-        super.onViewCreated()
+    init {
         items.value = listOf(MyItem(), MyItem(), MyItem(), MyItem(), MyItem())
+
     }
 }

@@ -37,6 +37,7 @@ class Adapter : ExpandableAdapter<MyItem>() {
 
         override fun bind(item: MyItem) {
             super.bind(item)
+
         }
     }
 }

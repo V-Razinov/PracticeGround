@@ -31,6 +31,9 @@ interface LikeableDao {
     @Query("UPDATE $TABLE_NAME_LIKEABLE SET $LIKEABLE_IS_LIKED = :isLiked WHERE id = :id")
     fun update(id: Int, isLiked: Boolean)
 
+    @Query("DELETE FROM $TABLE_NAME_LIKEABLE WHERE id = :id")
+    fun delete(id: Int)
+
     @Update(entity = LikeableEntity::class)
     fun update(entity: LikeableEntity)
 

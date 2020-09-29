@@ -38,10 +38,11 @@ class VKFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.viewPager.apply {
             adapter = this@VKFragment.adapter
             getChildAt(0)?.overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            registerOnPageChangeCallback(getOnPageChangeCallback())
+            registerOnPageChangeCallback(onPageChangedCallback)
         }
         subscribe()
     }
@@ -60,6 +61,13 @@ class VKFragment : BaseFragment() {
                 adapter.setPages(it)
             }
             command.setObserver(::executeCommand)
+        }
+    }
+
+    private val onPageChangedCallback: ViewPager2.OnPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            binding.chipGroup.children.elementAtOrNull(position)?.castTo<Chip>()?.isChecked = true
         }
     }
 
@@ -116,13 +124,6 @@ class VKFragment : BaseFragment() {
                     binding.viewPager.currentItem = group.indexOfChild(chip)
                 }
             }
-        }
-    }
-
-    private fun getOnPageChangeCallback(): ViewPager2.OnPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-            binding.chipGroup.children.elementAtOrNull(position)?.castTo<Chip>()?.isChecked = true
         }
     }
 
