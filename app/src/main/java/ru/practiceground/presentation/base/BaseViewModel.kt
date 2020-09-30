@@ -15,15 +15,15 @@ abstract class BaseViewModel : ViewModel() {
     protected val router = App.router
     protected val context get() = App.context
 
-    open fun onViewCreated() { }
+    open fun onViewCreated() = Unit
 
-    open fun onResume() { }
+    open fun onResume() = Unit
 
-    open fun onStart() { }
+    open fun onStart() = Unit
 
-    open fun onPause() { }
+    open fun onPause() = Unit
 
-    open fun onStop() { }
+    open fun onStop() = Unit
 
     protected fun getString(@StringRes id: Int, vararg formatArgs: String) = context.getString(id, *formatArgs)
 

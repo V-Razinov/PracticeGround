@@ -16,6 +16,7 @@ import ru.practiceground.App
 import ru.practiceground.R
 import ru.practiceground.databinding.FragmentVkBinding
 import ru.practiceground.other.castTo
+import ru.practiceground.other.caster
 import ru.practiceground.other.getBinding
 import ru.practiceground.other.getColor
 import ru.practiceground.presentation.base.BaseFragment
@@ -127,7 +128,7 @@ class VKFragment : BaseFragment() {
         }
     }
 
-    private fun ChipGroup.getChipById(id: Int): Chip? = children.find { it.id == id }?.castTo<Chip>()
+    private fun ChipGroup.getChipById(id: Int): Chip? = children.find { it.id == id }?.caster()
 
     private fun ChipGroup.setCheckedById(id: Int, checked: Boolean) {
         getChipById(id)?.apply {

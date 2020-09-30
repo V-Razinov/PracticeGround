@@ -39,12 +39,10 @@ class CreatePostFragment : BaseFragment() {
         }
         binding.more.apply {
             val popMenu = PopupMenu(ContextThemeWrapper(context, R.style.PopupMenuTheme), this)
-
             val items = listOf("Video", "Document", "Poll", "Map", "Product")
             items.forEachIndexed { index, item ->
                 popMenu.menu.add(index, index, index, item)
             }
-
             popMenu.setOnMenuItemClickListener { menuItem ->
                 Toast.makeText(context, items[menuItem.itemId], Toast.LENGTH_LONG).show()
                 true

@@ -81,10 +81,8 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             val rows = (if (item.isExpanded) item.categories else item.categories.subList(0, item.previewCount))
                 .splitBySize(columns)
-
             rows.forEachIndexed { index, row ->
                 val tableRow = getTableRow(view.context)
-
                 row.forEach {
                     tableRow.addView(getCategoryView(it, item.onCategoryClick))
                 }
@@ -106,9 +104,7 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         item.categories.subList(item.previewCount + newItems1.size, item.categories.size)
                             .splitBySize(columns)
                             .forEach {
-                                val tableRow = getTableRow(view.context).apply {
-                                    layoutTransition = LayoutTransition()
-                                }
+                                val tableRow = getTableRow(view.context).apply { layoutTransition = LayoutTransition() }
                                 it.forEach { category ->
                                     tableRow.addView(getCategoryView(category, item.onCategoryClick))
                                 }
@@ -164,11 +160,9 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val inflater = LayoutInflater.from(view.context)
 
         fun bind(item: MiniAppsItem) {
-
             item.miniApps.forEach {
                 view.mini_apps.addView(getMiniAppView(it, item.onMiniAppCLick))
             }
-
             view.more_mini_apps.setOnClickListener { item.onMoreMiniAppsClick() }
         }
 
