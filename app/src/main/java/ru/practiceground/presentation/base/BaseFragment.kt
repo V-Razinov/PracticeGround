@@ -13,7 +13,6 @@ import ru.practiceground.other.base.SingleLiveEvent
 import ru.practiceground.other.getColor
 
 abstract class BaseFragment : Fragment() {
-
     abstract val viewModel: BaseViewModel
     abstract val bgDrawable: Drawable?
     protected val defaultBgColor get() = ColorDrawable(getColor(R.color.whiteFFF))

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/vids_1"
+        android:icon="@drawable/ic_round_apps_24"
+        android:title="vids_1"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/vids_2"
+        android:icon="@drawable/ic_round_people_outline_24"
+        android:title="vids_2"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/vids_3"
+        android:icon="@drawable/ic_round_photo_camera_24"
+        android:title="vids_3"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/vids_4"
+        android:icon="@drawable/ic_delete_24"
+        android:title="vids_4"
+        app:showAsAction="always" />
+</menu>
