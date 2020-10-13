@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: MainActivityBinding = MainActivityBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
         binding.vm = viewModel
         setContentView(binding.root)
         viewModel.onCreate(supportFragmentManager, binding.container.id, ::finish)
@@ -25,5 +26,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         viewModel.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.onDestroy()
     }
 }

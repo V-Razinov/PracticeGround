@@ -20,7 +20,7 @@ class MotionFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = getBinding(inflater, container, R.layout.fragment_motion)
         binding.lifecycleOwner = this
-        binding.motion.addTransitionListener1(viewModel.getProgressListener())
+        binding.motion.addTransitionListener1(viewModel.transitionListener)
         binding.motion.transitionToStart()
         return binding.root
     }
