@@ -16,7 +16,7 @@ import kotlin.math.round
 
 class FilePickerViewModel : BaseViewModel() {
 
-    val openFilePicker = SingleLiveEvent<Boolean>()
+    val openFilePicker = SingleLiveEvent<Unit>()
     val name = MutableLiveData<String>()
     val size = MutableLiveData<String>()
     val fileUri = MutableLiveData<Uri?>()
@@ -26,7 +26,7 @@ class FilePickerViewModel : BaseViewModel() {
     private var file: File? = null
 
     fun onPickImageClick() {
-        openFilePicker.value = true
+        openFilePicker.value = Unit
     }
 
     fun onCompressClick() {
@@ -47,7 +47,7 @@ class FilePickerViewModel : BaseViewModel() {
                         size.value = it.length()
                             .toDouble()
                             .div(1000)
-                            .apply { round(this) }
+                            .run { round(this) }
                             .toString()
                             .plus("KB")
                     }
@@ -59,7 +59,7 @@ class FilePickerViewModel : BaseViewModel() {
                     size.value = it.length()
                         .toDouble()
                         .div(1000)
-                        .apply { round(this) }
+                        .run { round(this) }
                         .toString()
                         .plus("KB")
                 }
@@ -70,30 +70,31 @@ class FilePickerViewModel : BaseViewModel() {
     fun loadFile(uri: Uri, contentResolver: ContentResolver) {
         viewModelScope.launch(Dispatchers.IO) {
             contentResolver.query(uri, null, null, null, null).use { cursor ->
-                if (cursor?.moveToFirst() == true) {
-                    name.postValue(cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)))
-                    val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-                    if (!cursor.isNull(sizeIndex))
-                        size.postValue(
-                            contentResolver.openFileDescriptor(uri, "r")?.statSize
-                                ?.toDouble()
-                                ?.div(1000)
-                                ?.apply { round(this) }
-                                ?.toString()
-                                ?.plus("KB")
-                        )
-                } else {
+                if (cursor?.moveToFirst() != true) {
                     showMessage("Error")
+                    return@launch
                 }
+
+                name.postValue(cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)))
+                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                if (!cursor.isNull(sizeIndex))
+                    size.postValue(
+                        contentResolver.openFileDescriptor(uri, "r")
+                            ?.statSize
+                            ?.toDouble()
+                            ?.div(1000)
+                            ?.run { round(this) }
+                            ?.toString()
+                            ?.plus("KB")
+                    )
             }
             type = contentResolver.getType(uri) ?: ""
 
-            contentResolver.openInputStream(uri).use { inputStream ->
-                inputStream ?: return@launch
+            contentResolver.openInputStream(uri)?.use { inputStream ->
                 fileUri.postValue(try {
                     file?.delete()
                     file = File(context.externalCacheDir, name.value ?: "File").apply { createNewFile() }
-                    val fileOutputStream = FileOutputStream(file)
+                    val fileOutputStream = FileOutputStream(file!!)
                     copyStream(inputStream, fileOutputStream)
                     fileOutputStream.flush()
                     Uri.fromFile(file)

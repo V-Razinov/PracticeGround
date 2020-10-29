@@ -18,11 +18,12 @@ import ru.practiceground.databinding.FragmentFilePickerBinding
 import ru.practiceground.other.getBinding
 import ru.practiceground.presentation.base.BaseFragment
 
+private const val REQUEST_CODE = 123
+
 class FilePickerFragment : BaseFragment() {
     override val viewModel: FilePickerViewModel by viewModels()
     override val bgDrawable: Drawable? = defaultBgColor
     private lateinit var binding: FragmentFilePickerBinding
-    private val REQUEST_CODE = 123
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = getBinding(container, R.layout.fragment_file_picker)
@@ -39,7 +40,7 @@ class FilePickerFragment : BaseFragment() {
 
     private fun subscribe() {
         with(viewModel) {
-            openFilePicker.setObserver(::startFilePicker)
+            openFilePicker.setUnitObserver(::startFilePicker)
             fileUri.setObserver {
                 if (it == null)
                     Glide.with(this@FilePickerFragment).load(R.drawable.ic_round_image_24).into(binding.imageIv)
@@ -75,8 +76,7 @@ class FilePickerFragment : BaseFragment() {
         }
     }
 
-    private fun startFilePicker(open: Boolean) {
-        if (!open) return
+    private fun startFilePicker() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "image/*"

@@ -1,7 +1,9 @@
 package ru.practiceground.other.navigation
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.transition.*
 import ru.practiceground.R
 import ru.practiceground.presentation.base.BaseFragment
 

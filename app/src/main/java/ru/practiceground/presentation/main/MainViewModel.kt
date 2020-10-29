@@ -19,6 +19,7 @@ class MainViewModel : ViewModel() {
         EventBus.getDefault().register(this)
     }
 
+
     @Subscribe
     fun showLoader(event: ShowLoader) {
         showLoader.value = event.show
@@ -26,5 +27,9 @@ class MainViewModel : ViewModel() {
 
     fun onBackPressed() {
         App.router.back()
+    }
+
+    fun onDestroy() {
+        EventBus.getDefault().unregister(this)
     }
 }

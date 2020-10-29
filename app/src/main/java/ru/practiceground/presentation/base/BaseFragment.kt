@@ -13,7 +13,6 @@ import ru.practiceground.other.base.SingleLiveEvent
 import ru.practiceground.other.getColor
 
 abstract class BaseFragment : Fragment() {
-
     abstract val viewModel: BaseViewModel
     abstract val bgDrawable: Drawable?
     protected val defaultBgColor get() = ColorDrawable(getColor(R.color.whiteFFF))
@@ -50,6 +49,10 @@ abstract class BaseFragment : Fragment() {
 
     protected fun <T> SingleLiveEvent<T>.setObserver(action: (T) -> Unit) {
         observe(viewLifecycleOwner, Observer { action.invoke(it ?: return@Observer) })
+    }
+
+    protected fun SingleLiveEvent<Unit>.setUnitObserver(action: () -> Unit) {
+        observe(viewLifecycleOwner, { it ?: return@observe; action() })
     }
 
     protected fun <T> LiveData<T>.setObserver(action: (T) -> Unit) {
