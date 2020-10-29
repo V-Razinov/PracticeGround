@@ -9,6 +9,7 @@ import ru.practiceground.other.base.SingleLiveEvent
 import ru.practiceground.other.navigation.Screens
 import ru.practiceground.presentation.base.BaseFragment
 import ru.practiceground.presentation.base.BaseViewModel
+import kotlin.math.abs
 
 class VidsViewModel : BaseViewModel() {
 
@@ -20,7 +21,7 @@ class VidsViewModel : BaseViewModel() {
         override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) = Unit
 
         override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-            sceneProgress.value = p3
+            sceneProgress.value = abs(p3)
         }
     }
     private val fragment by lazy { Screens.motionLayout }

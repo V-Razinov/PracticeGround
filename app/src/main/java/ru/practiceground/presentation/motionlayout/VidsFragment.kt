@@ -26,7 +26,7 @@ class VidsFragment : BaseFragment() {
         binding.vidsMotion.transitionToEnd()
         viewModel.subscribe {
             sceneProgress.observe(viewLifecycleOwner) { progress ->
-                binding.vidsMotion.progress = abs(progress)
+                binding.vidsMotion.progress = progress
             }
             showFragment.observe(viewLifecycleOwner) { fragment ->
                 binding.vidsMotion.transitionToStart()

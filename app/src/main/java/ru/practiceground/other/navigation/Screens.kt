@@ -10,6 +10,7 @@ import ru.practiceground.presentation.motionlayout.MotionFragment
 import ru.practiceground.presentation.motionlayout.VidsFragment
 import ru.practiceground.presentation.roomlivedata.ViewPagerFragment
 import ru.practiceground.presentation.root.RootFragment
+import ru.practiceground.presentation.service.MyServiceFragment
 import ru.practiceground.presentation.swipetoshowaction.SwipeFragment
 import ru.practiceground.presentation.vk.VKFragment
 
@@ -26,4 +27,5 @@ object Screens {
     val vk get() = VKFragment()
     val vidsFragment get() = VidsFragment()
     val motionLayout get() = MotionFragment()
+    val myService get() = MyServiceFragment()
 }

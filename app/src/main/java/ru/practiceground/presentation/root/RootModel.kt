@@ -18,5 +18,6 @@ enum class RootItems(val title: String, val getFragment: () -> BaseFragment) {
     CUSTOM_MESSAGES("Custom messages(Toast + SnackBar)", Screens::customMessages::get),
     FILE_PICKER("File picker", Screens::filePicker::get),
     CUSTOM_VIEWS("VK", Screens::vk::get),
-    MOTION_LAYOUT("Motion layout", Screens::vidsFragment::get)
+    MOTION_LAYOUT("Motion layout", Screens::vidsFragment::get),
+    MY_SERVICE("Notif service", Screens::myService::get)
 }

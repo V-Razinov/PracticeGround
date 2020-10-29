@@ -51,6 +51,10 @@ abstract class BaseFragment : Fragment() {
         observe(viewLifecycleOwner, Observer { action.invoke(it ?: return@Observer) })
     }
 
+    protected fun SingleLiveEvent<Unit>.setUnitObserver(action: () -> Unit) {
+        observe(viewLifecycleOwner, { it ?: return@observe; action() })
+    }
+
     protected fun <T> LiveData<T>.setObserver(action: (T) -> Unit) {
         observe(viewLifecycleOwner, Observer(action))
     }
