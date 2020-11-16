@@ -55,11 +55,10 @@ class PagePagingAdapter: PagedListAdapter<LikeableItem, PagePagingAdapter.Holder
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<LikeableItem>() {
-            override fun areItemsTheSame(oldItem: LikeableItem, newItem: LikeableItem): Boolean =
-                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: LikeableItem, newItem: LikeableItem): Boolean =
-                oldItem.compareContent(newItem)
+            override fun areItemsTheSame(oldItem: LikeableItem, newItem: LikeableItem): Boolean = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: LikeableItem, newItem: LikeableItem): Boolean = oldItem.compareContent(newItem)
         }
     }
 }

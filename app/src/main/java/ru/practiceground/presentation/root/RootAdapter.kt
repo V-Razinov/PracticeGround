@@ -37,7 +37,7 @@ class RootAdapter : RecyclerView.Adapter<RootAdapter.Item>() {
         fun bind(data: RootItem) {
             binding.apply {
                 item = data.title
-                root.setOnClickListener { onItemClickAction.invoke(data.type) }
+                root.setOnClickListener { onItemClickAction(data.type) }
             }
         }
     }

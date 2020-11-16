@@ -37,7 +37,9 @@ class DrawerFragment : BaseFragment() {
         drawer_tb.apply {
             setNavigationOnClickListener { drawer_dl.openDrawer(GravityCompat.START) }
             setOnMenuItemClickListener { item ->
-                if (item.itemId == R.id.drawer_tb_menu) drawer_dl.openDrawer(GravityCompat.END)
+                if (item.itemId == R.id.drawer_tb_menu) {
+                    drawer_dl.openDrawer(GravityCompat.END)
+                }
                 item.itemId == R.id.drawer_tb_menu
             }
         }
@@ -47,9 +49,8 @@ class DrawerFragment : BaseFragment() {
             override fun onDrawerStateChanged(newState: Int) = Unit
 
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                drawer_content.translationX = drawerView.width * slideOffset * drawer_dl.run {
-                    if (isDrawerVisible(GravityCompat.START)) 1 else -1
-                }
+                drawer_content.translationX =
+                    drawerView.width * slideOffset * if (drawer_dl.isDrawerVisible(GravityCompat.START)) 1 else -1
             }
         })
         drawer_nav_view.setOnMenuItemClickListener(viewModel::onMenuClick)

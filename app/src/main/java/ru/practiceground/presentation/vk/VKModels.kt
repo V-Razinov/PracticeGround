@@ -5,9 +5,9 @@ class TabItem(
     var isChecked: Boolean = false
 )
 
-abstract class Command
-
-class ShowStoriesView(val xy: Pair<Float, Float>) : Command()
-class ShowCreatePostDialog : Command()
+sealed class Command {
+    class ShowStoriesView(val xy: Pair<Float, Float>) : Command()
+    object ShowCreatePostDialog : Command()
+}
 
 class Topic()

@@ -1,9 +1,7 @@
 package ru.practiceground.other.navigation
 
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.transition.*
 import ru.practiceground.R
 import ru.practiceground.presentation.base.BaseFragment
 
@@ -42,10 +40,11 @@ class Router {
             return
         }
 
-        if (fragmentManager.backStackEntryCount == 1)
+        if (fragmentManager.backStackEntryCount == 1) {
             finishActivity.invoke()
-        else
+        } else {
             fragmentManager.popBackStack()
+        }
     }
 
     fun setOnBackPressedCallback(action: () -> Unit) {

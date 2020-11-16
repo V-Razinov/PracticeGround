@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import ru.practiceground.R
@@ -43,7 +44,8 @@ class MyServiceFragment : BaseFragment() {
         super.onStart()
         activity?.let { acty ->
             viewModel.createBoundService(acty)
-            acty.registerReceiver(receiver, IntentFilter(MyBroadcastReceiver.RECEIVER_ACTION))
+            LocalBroadcastManager.getInstance(acty)
+                .registerReceiver(receiver, IntentFilter(MyBroadcastReceiver.RECEIVER_ACTION))
         }
     }
 

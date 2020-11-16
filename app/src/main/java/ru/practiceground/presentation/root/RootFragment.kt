@@ -20,7 +20,9 @@ class RootFragment : BaseFragment() {
     override val viewModel: RootViewModel by viewModels()
     override val bgDrawable: Drawable? = ColorDrawable(getColor(R.color.whiteFFF))
 
-    private val rootAdapter: RootAdapter by lazy { RootAdapter().apply { setItemClickAction(viewModel::onItemClick) } }
+    private val rootAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        RootAdapter().apply { setItemClickAction(viewModel::onItemClick) }
+    }
     private lateinit var binding: RootFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

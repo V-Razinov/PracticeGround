@@ -36,7 +36,7 @@ class SwipeAdapter : RecyclerView.Adapter<SwipeAdapter.SwipeViewHolder>() {
                     setOnCentralPanelClickListener {
                         Toast.makeText(context, "click-clack", Toast.LENGTH_LONG).show()
                     }
-                    setOnPanelChangedListener { item.currentPanel = it }
+                    setOnPanelChangedListener(item::currentPanel::set)
                     setOnMovingListener(
                         onStarted = { _, _, _ ->
                             item_top_line_v.isVisible = true

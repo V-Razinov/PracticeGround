@@ -24,7 +24,7 @@ class VidsViewModel : BaseViewModel() {
             sceneProgress.value = abs(p3)
         }
     }
-    private val fragment by lazy { Screens.motionLayout }
+    private val fragment by lazy(LazyThreadSafetyMode.NONE, Screens::motionLayout)
 
     fun onImageClick(view: View) {
         showFragment.value = fragment

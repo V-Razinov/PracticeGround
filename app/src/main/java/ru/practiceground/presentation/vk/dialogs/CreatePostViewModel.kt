@@ -19,17 +19,11 @@ class CreatePostViewModel : BaseViewModel() {
     }
 
     fun onTimeClick() {
-        if (time.value == null)
-            time.value = Calendar.getInstance()
-        else
-            time.value = null
+        time.value = if (time.value == null) Calendar.getInstance() else null
     }
 
     fun onTopicClick() {
-        if (topics.value?.isEmpty() == true)
-            topics.value = listOf(Topic())
-        else
-            topics.value = emptyList()
+        topics.value = if (topics.value?.isEmpty() == true) listOf(Topic()) else emptyList()
     }
 
     fun onChooseBgClick() {}

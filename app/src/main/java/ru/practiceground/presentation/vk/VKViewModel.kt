@@ -34,9 +34,8 @@ class VKViewModel : BaseViewModel() {
             TabItem("Coronavirus", false),
             TabItem("Focus", false),
         )
+        setItems()
     }
-
-    init { setItems() }
 
     private fun setItems() {
         stories.value = StoriesItem(
@@ -66,11 +65,11 @@ class VKViewModel : BaseViewModel() {
     }
 
     private fun onStoryClick(story: StoryItem, x: Float, y: Float) {
-        command.value = ShowStoriesView(x to y)
+        command.value = Command.ShowStoriesView(x to y)
     }
 
     private fun onCreatePostClick() {
-        command.value = ShowCreatePostDialog()
+        command.value = Command.ShowCreatePostDialog
     }
 
     private fun onClipClick() { }

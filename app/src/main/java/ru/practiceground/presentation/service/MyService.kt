@@ -60,7 +60,6 @@ class MyService : Service() {
             if (msg.what == SERVICE_NOTIFICATION) {
                 showNotification(msg.obj as? String ?: return)
             }
-            super.handleMessage(msg)
         }
 
         private fun showNotification(text: String) {

@@ -20,7 +20,12 @@ class ExpandableRecyclerFragment : BaseFragment() {
     override val bgDrawable: Drawable? = ColorDrawable(getColor(R.color.blue728))
 
     private lateinit var binding: FragmentExpanableRecViewBinding
-    private val adapter = Adapter()
+    private lateinit var adapter: Adapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = Adapter()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = getBinding(inflater, container, R.layout.fragment_expanable_rec_view)
@@ -38,8 +43,6 @@ class ExpandableRecyclerFragment : BaseFragment() {
             adapter = this@ExpandableRecyclerFragment.adapter
         }
 
-        viewModel.items.observe(viewLifecycleOwner) {
-            adapter.items = it
-        }
+        viewModel.items.observe(viewLifecycleOwner, adapter::items::set)
     }
 }

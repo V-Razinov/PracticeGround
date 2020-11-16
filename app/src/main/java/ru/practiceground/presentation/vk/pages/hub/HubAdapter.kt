@@ -62,9 +62,11 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
     
     fun notifyByViewType(viewType: Int) {
-        val index = items.indexOfFirst { it.viewType == viewType }
-        if (index != -1)
-            notifyItemChanged(index)
+        items.indexOfFirst { it.viewType == viewType }.let { index ->
+            if (index != -1) {
+                notifyItemChanged(index)
+            }
+        }
     }
 
     @Suppress("NAME_SHADOWING")
@@ -76,8 +78,9 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(item: CategoriesItem) {
 
-            if (view.categories_table.isNotEmpty())
+            if (view.categories_table.isNotEmpty()) {
                 return
+            }
 
             val rows = (if (item.isExpanded) item.categories else item.categories.subList(0, item.previewCount))
                 .splitBySize(columns)
@@ -108,10 +111,11 @@ class HubAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                                 it.forEach { category ->
                                     tableRow.addView(getCategoryView(category, item.onCategoryClick))
                                 }
-                                if (tableRow.childCount < columns)
+                                if (tableRow.childCount < columns) {
                                     repeat(tableRow.childCount - row.size) {
                                         tableRow.addView(getEmptyView(view.context))
                                     }
+                                }
                                 view.categories_table.addView(tableRow)
                             }
                     }
