@@ -143,9 +143,11 @@ class DragToShowActionsLayout : ConstraintLayout {
 
                     times = tryCatchDragging(isDragging, prevX, event, prevY, times)
                     isDragging = times > 5
-                    if (!isDragging) return@setOnTouchListener false
+                    if (!isDragging)
+                        return@setOnTouchListener false
 
-                    if (startX.isNaN()) startX = event.x
+                    if (startX.isNaN())
+                        startX = event.x
 
                     val nextX = view.x + event.x - startX
                     view.x = when {
@@ -196,8 +198,7 @@ class DragToShowActionsLayout : ConstraintLayout {
     }
 
     private fun getMoveDirection(view: View): MoveDirections? {
-        if (view.x0 == 0f) return MoveDirections.CENTER
-        return if (view.x0 in panelStart.run { x0..xCenter } || view.x1 in panelEnd.run { xCenter..x1 })
+        return if (view.x0 == 0f || view.x0 in panelStart.run { x0..xCenter } || view.x1 in panelEnd.run { xCenter..x1 })
             MoveDirections.CENTER
         else
             if (view.x0 in panelStart.run { xCenter..x1 })

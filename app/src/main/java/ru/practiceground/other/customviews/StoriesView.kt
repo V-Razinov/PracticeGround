@@ -60,7 +60,7 @@ class StoriesView : ConstraintLayout {
     private val exoPlayer: SimpleExoPlayer by lazy { SimpleExoPlayer.Builder(context).build() }
 
     init {
-        inflate(context, R.layout.view_stories, this).apply {
+        with (inflate(context, R.layout.view_stories, this)) {
             root = findViewById(R.id.root)
             timeLinesLL = findViewById(R.id.time_lines)
             playerView = findViewById(R.id.player_video_view)
@@ -71,6 +71,11 @@ class StoriesView : ConstraintLayout {
             resend = findViewById(R.id.resend_iv)
             more = findViewById(R.id.more_iv)
         }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        exoPlayer.stop()
     }
 
     override fun onAttachedToWindow() {

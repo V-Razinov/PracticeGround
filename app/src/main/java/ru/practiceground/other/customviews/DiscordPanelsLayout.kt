@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -82,7 +83,7 @@ class DiscordPanelsLayout : CardView {
                 isFocusableInTouchMode = false
                 isVisible = false
             }
-            background = context.getDrawable(R.drawable.bg_rounded_10dp)
+            background = ContextCompat.getDrawable(context, R.drawable.bg_rounded_10dp)
             backgroundTintList = ColorStateList.valueOf(getColor(R.color.black232_50_transparent))
         }
         panelCenter.addView(centerPanelBlockView)

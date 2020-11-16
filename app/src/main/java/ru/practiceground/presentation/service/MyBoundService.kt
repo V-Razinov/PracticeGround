@@ -55,8 +55,6 @@ class MyBoundService : Service() {
                 (msg.obj as? String)?.let { message ->
                     showNotification(message)
                 }
-            } else {
-                super.handleMessage(msg)
             }
         }
 

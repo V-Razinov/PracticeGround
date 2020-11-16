@@ -8,9 +8,13 @@ import ru.practiceground.presentation.roomlivedata.pages.favs.PageFavsFragment
 
 class ViewPagerAdapter(parentFragment: Fragment) : FragmentStateAdapter(parentFragment) {
 
-    private val fragments = listOf(PageAllFragment(), PageFavsFragment())
+    //xD
+    private val fragments = listOf(
+        lazy(LazyThreadSafetyMode.NONE, ::PageAllFragment),
+        lazy(LazyThreadSafetyMode.NONE, ::PageAllFragment)
+    )
 
     override fun getItemCount(): Int = fragments.size
 
-    override fun createFragment(position: Int): Fragment = fragments[position]
+    override fun createFragment(position: Int): Fragment = fragments[position].value
 }

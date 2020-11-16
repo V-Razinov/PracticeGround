@@ -7,11 +7,8 @@ import ru.practiceground.presentation.base.BaseViewModel
 
 class SwipeViewModel : BaseViewModel() {
 
-    val items = MutableLiveData<List<BaseRecViewItem>>()
-
-    override fun onViewCreated() {
-        super.onViewCreated()
-        items.value = listOf(
+    val items = MutableLiveData<List<BaseRecViewItem>>(
+        listOf(
             SwipeItem(DragToShowActionsLayout.Panels.START),
             SwipeItem(),
             SwipeItem(),
@@ -34,5 +31,5 @@ class SwipeViewModel : BaseViewModel() {
             SwipeItem(),
             SwipeItem()
         )
-    }
+    )
 }

@@ -30,10 +30,11 @@ fun getColor(@ColorRes id: Int): Int = ContextCompat.getColor(App.context, id)
 
 fun getDialogPadding(context: Context): Int {
     val typedValue = TypedValue()
-    return if (context.theme.resolveAttribute(R.attr.dialogPreferredPadding, typedValue, true))
+    return if (context.theme.resolveAttribute(R.attr.dialogPreferredPadding, typedValue, true)) {
         TypedValue.complexToDimensionPixelSize(typedValue.data, context.resources.displayMetrics)
-    else
+    } else {
         0
+    }
 }
 
 fun copyStream(inputStream: InputStream, outputStream: OutputStream) {
@@ -48,7 +49,4 @@ fun copyStream(inputStream: InputStream, outputStream: OutputStream) {
 
 inline fun <reified T> Any?.castTo(): T? = this as? T
 
-inline fun <reified A, reified B : A> A.caster(): B? = if (B::class.java.isAssignableFrom(A::class.java))
-    this as B
-else
-    null
+inline fun <reified A, reified B : A> A.caster(): B? = if (B::class.java.isAssignableFrom(A::class.java)) this as B else null

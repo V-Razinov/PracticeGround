@@ -34,7 +34,6 @@ class FilePickerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         subscribe()
     }
 
@@ -42,10 +41,12 @@ class FilePickerFragment : BaseFragment() {
         with(viewModel) {
             openFilePicker.setUnitObserver(::startFilePicker)
             fileUri.setObserver {
-                if (it == null)
-                    Glide.with(this@FilePickerFragment).load(R.drawable.ic_round_image_24).into(binding.imageIv)
-                else
-                    Glide.with(this@FilePickerFragment).load(it).into(binding.imageIv)
+                Glide.with(this@FilePickerFragment).run {
+                    if (it == null)
+                        load(R.drawable.ic_round_image_24)
+                    else
+                        load(it)
+                }.into(binding.imageIv)
             }
             openPickSizeDialog.setObserver(::openSizeDialog)
         }
@@ -53,27 +54,26 @@ class FilePickerFragment : BaseFragment() {
 
     private fun openSizeDialog(size: Int) {
         var sizeTo = size
+        val view = layoutInflater.inflate(R.layout.dialog_compress, null)
+        view.seek_value.text = "0"
+        view.dialog_seek_bar.apply {
+            max = size
+            setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(sB: SeekBar?, progress: Int, fromUser: Boolean) {
+                    sizeTo = progress
+                    view.seek_value.text = progress.toString()
+                }
+                override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+                override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+            })
+        }
         AlertDialog.Builder(context ?: return).apply {
-            val view = layoutInflater.inflate(R.layout.dialog_compress, null)
-            view.seek_value.text = "0"
-            view.dialog_seek_bar.apply {
-                max = size
-                setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener {
-                    override fun onProgressChanged(sB: SeekBar?, progress: Int, fromUser: Boolean) {
-                        sizeTo = progress
-                        view.seek_value.text = progress.toString()
-                    }
-                    override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
-                    override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
-                })
-            }
             setTitle("Выберите размер файла")
-            setMessage("Избражение будет сжиматься по 5% процентов, пока не будет меньше указанного размера")
+            setMessage("Избражение будет сжиматься по 5% процентов, пока не будет меньше указанного размера или не сожмется до минимума")
             setView(view)
             setPositiveButton("Сжать") { _, _ -> viewModel.onDialogOkClick(sizeTo * 1000) }
             setNegativeButton("Отмена") { _, _ ->  }
-            show()
-        }
+        }.show()
     }
 
     private fun startFilePicker() {
@@ -89,8 +89,9 @@ class FilePickerFragment : BaseFragment() {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             viewModel.loadFile(data?.data ?: return, activity?.contentResolver ?: return)
         } else {
-            if (resultCode != Activity.RESULT_CANCELED)
+            if (resultCode != Activity.RESULT_CANCELED) {
                 Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

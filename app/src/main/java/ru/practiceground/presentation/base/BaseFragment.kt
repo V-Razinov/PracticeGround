@@ -43,20 +43,20 @@ abstract class BaseFragment : Fragment() {
         viewModel.onStop()
     }
 
-    protected fun <T> MutableLiveData<T>.setObserver(action: (T) -> Unit) {
-        observe(viewLifecycleOwner, Observer(action))
+    protected inline fun <T> MutableLiveData<T>.setObserver(crossinline action: (T) -> Unit) {
+        observe(viewLifecycleOwner) { action(it) }
     }
 
-    protected fun <T> SingleLiveEvent<T>.setObserver(action: (T) -> Unit) {
+    protected inline fun <T> SingleLiveEvent<T>.setObserver(crossinline action: (T) -> Unit) {
         observe(viewLifecycleOwner, Observer { action.invoke(it ?: return@Observer) })
     }
 
-    protected fun SingleLiveEvent<Unit>.setUnitObserver(action: () -> Unit) {
+    protected inline fun SingleLiveEvent<Unit>.setUnitObserver(crossinline action: () -> Unit) {
         observe(viewLifecycleOwner, { it ?: return@observe; action() })
     }
 
-    protected fun <T> LiveData<T>.setObserver(action: (T) -> Unit) {
-        observe(viewLifecycleOwner, Observer(action))
+    protected inline fun <T> LiveData<T>.setObserver(crossinline action: (T) -> Unit) {
+        observe(viewLifecycleOwner) { action(it) }
     }
 
     private fun setBgDrawable() {

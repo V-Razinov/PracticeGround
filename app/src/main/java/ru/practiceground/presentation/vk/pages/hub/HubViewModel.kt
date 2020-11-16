@@ -59,13 +59,14 @@ class HubViewModel : BaseViewModel() {
     }
 
     private fun getRouteName(address: String, newPrice: String, oldPrice: String) : CharSequence {
-        return if (newPrice.isEmpty())
+        return if (newPrice.isEmpty()) {
             "$address for $oldPrice"
-        else
+        } else {
             SpannableStringBuilder("$address for $newPrice ")
                 .append(SpannableString(oldPrice).apply {
                     setSpan(StrikethroughSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     setSpan(ForegroundColorSpan(getColor(R.color.grey)), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 })
+        }
     }
 }

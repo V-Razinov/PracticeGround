@@ -15,8 +15,7 @@ class LikeableRepository private constructor(private val likeableDao: LikeableDa
         private var instance: LikeableRepository? = null
 
         fun getInstance(likeableDao: LikeableDao): LikeableRepository = instance ?: synchronized(this) {
-            instance = LikeableRepository(likeableDao = likeableDao)
-            instance!!
+            LikeableRepository(likeableDao = likeableDao).also(::instance::set)
         }
     }
 
@@ -28,7 +27,7 @@ class LikeableRepository private constructor(private val likeableDao: LikeableDa
 
     private fun mapToLikeableItem(items: List<LikeableEntity>) = items.map(::LikeableItem)
 
-    private val config: PagedList.Config get() = Config(
+    private val config: PagedList.Config = Config(
         pageSize = 20,
         prefetchDistance = 40,
         enablePlaceholders = false,

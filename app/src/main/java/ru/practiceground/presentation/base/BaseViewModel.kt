@@ -3,12 +3,7 @@ package ru.practiceground.presentation.base
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import ru.practiceground.App
-import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel : ViewModel() {
 

@@ -19,7 +19,6 @@ class MainViewModel : ViewModel() {
         EventBus.getDefault().register(this)
     }
 
-
     @Subscribe
     fun showLoader(event: ShowLoader) {
         showLoader.value = event.show

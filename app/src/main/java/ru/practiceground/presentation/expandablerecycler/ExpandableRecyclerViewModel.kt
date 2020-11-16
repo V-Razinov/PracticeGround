@@ -5,10 +5,6 @@ import ru.practiceground.presentation.base.BaseViewModel
 
 class ExpandableRecyclerViewModel : BaseViewModel() {
 
-    val items = MutableLiveData<List<MyItem>>()
+    val items = MutableLiveData(listOf(MyItem(), MyItem(), MyItem(), MyItem(), MyItem()))
 
-    init {
-        items.value = listOf(MyItem(), MyItem(), MyItem(), MyItem(), MyItem())
-
-    }
 }

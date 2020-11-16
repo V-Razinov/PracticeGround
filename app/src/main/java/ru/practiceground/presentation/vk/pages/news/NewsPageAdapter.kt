@@ -1,12 +1,14 @@
 package ru.practiceground.presentation.vk.pages.news
 
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import ru.practiceground.App
 import ru.practiceground.R
 import ru.practiceground.databinding.ItemCreatePostBinding
 import ru.practiceground.databinding.ItemNewsPostBinding
+import ru.practiceground.other.extensions.replaceAll
 import ru.practiceground.other.getBinding
 
 class NewsPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -32,10 +34,7 @@ class NewsPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun setItems(newItems: List<NewsPageAdapterBaseItem>) {
-        items.apply {
-            clear()
-            addAll(newItems)
-        }
+        items.replaceAll(newItems)
         notifyDataSetChanged()
     }
 
@@ -50,12 +49,11 @@ class NewsPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.data = newsPostItem
             binding.like.setOnClickListener {
                 newsPostItem.isLiked = !newsPostItem.isLiked
-
-                binding.likeTv.setCompoundDrawablesWithIntrinsicBounds(ResourcesCompat.getDrawable(
-                    App.context.resources,
-                    if (newsPostItem.isLiked) R.drawable.ic_heart_filled_24 else R.drawable.ic_heart_24,
-                    null
-                ), null, null, null)
+                val drawable = ContextCompat.getDrawable(
+                    App.context,
+                    if (newsPostItem.isLiked) R.drawable.ic_heart_filled_24 else R.drawable.ic_heart_24
+                )
+                binding.likeTv.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
             }
         }
     }

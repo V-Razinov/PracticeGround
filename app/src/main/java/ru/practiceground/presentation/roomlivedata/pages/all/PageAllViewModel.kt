@@ -14,8 +14,8 @@ import ru.practiceground.presentation.roomlivedata.LikeableItem
 
 class PageAllViewModel : BaseViewModel() {
 
-    private val repository: LikeableRepository =
-        LikeableRepository.getInstance(LikeableDataBase.getInstance(context, viewModelScope).likeableDao())
+    private val repository = LikeableRepository
+        .getInstance(LikeableDataBase.getInstance(context, viewModelScope).likeableDao())
 // Если не нужна пагинация
 //    val items = MediatorLiveData<Pair<List<LikeableItem>, DiffUtil.DiffResult>>().apply {
 //        addSource(repository.all) { newValue ->

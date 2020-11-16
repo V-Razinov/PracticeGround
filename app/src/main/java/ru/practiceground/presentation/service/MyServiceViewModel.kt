@@ -8,6 +8,7 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import android.os.Message
 import androidx.lifecycle.MutableLiveData
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import ru.practiceground.presentation.base.BaseViewModel
 import ru.practiceground.presentation.service.MyBoundService.Companion.BOUND_NOTIFICATION
 
@@ -60,6 +61,6 @@ class MyServiceViewModel : BaseViewModel() {
         Intent().apply {
             action = MyBroadcastReceiver.RECEIVER_ACTION
             putExtra(MyService.NOTIF_CONTENT, message.value)
-        }.also(context::sendBroadcast)
+        }.also(LocalBroadcastManager.getInstance(context)::sendBroadcast)
     }
 }

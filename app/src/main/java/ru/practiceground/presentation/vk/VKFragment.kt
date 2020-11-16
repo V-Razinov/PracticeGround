@@ -16,7 +16,6 @@ import ru.practiceground.App
 import ru.practiceground.R
 import ru.practiceground.databinding.FragmentVkBinding
 import ru.practiceground.other.castTo
-import ru.practiceground.other.caster
 import ru.practiceground.other.getBinding
 import ru.practiceground.other.getColor
 import ru.practiceground.presentation.base.BaseFragment
@@ -68,14 +67,17 @@ class VKFragment : BaseFragment() {
     private val onPageChangedCallback: ViewPager2.OnPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-            binding.chipGroup.children.elementAtOrNull(position)?.castTo<Chip>()?.isChecked = true
+            binding.chipGroup.children
+                .elementAtOrNull(position)
+                ?.castTo<Chip>()
+                ?.isChecked = true
         }
     }
 
     private fun executeCommand(command: Command) {
         when (command) {
-            is ShowCreatePostDialog -> showCreatePostDialog()
-            is ShowStoriesView -> showView(command.xy)
+            is Command.ShowCreatePostDialog -> showCreatePostDialog()
+            is Command.ShowStoriesView -> showView(command.xy)
         }
     }
 
@@ -107,8 +109,9 @@ class VKFragment : BaseFragment() {
                 setCheckedColor()
             }
 
-            if (it.isChecked)
+            if (it.isChecked) {
                 prevCheckedTabId = tab.id
+            }
 
             binding.chipGroup.addView(tab)
         }
@@ -128,7 +131,7 @@ class VKFragment : BaseFragment() {
         }
     }
 
-    private fun ChipGroup.getChipById(id: Int): Chip? = children.find { it.id == id }?.caster()
+    private fun ChipGroup.getChipById(id: Int): Chip? = children.find { it.id == id }?.castTo<Chip>()
 
     private fun ChipGroup.setCheckedById(id: Int, checked: Boolean) {
         getChipById(id)?.apply {

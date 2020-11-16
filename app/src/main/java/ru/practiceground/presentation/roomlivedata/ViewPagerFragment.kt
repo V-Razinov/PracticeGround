@@ -70,8 +70,9 @@ class ViewPagerFragment : BaseFragment() {
                             })
                         })
                         .setPositiveButton("Add") { _, _ ->
-                            if (entityText.isNotEmpty())
+                            if (entityText.isNotEmpty()) {
                                 viewModel.onAddClick(entityText, binding.pager.currentItem)
+                            }
                         }
                         .setNegativeButton("Close") { _, _ -> }
                         .show()
