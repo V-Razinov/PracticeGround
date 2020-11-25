@@ -9,12 +9,11 @@ import ru.practiceground.databinding.MainActivityBinding
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
+    private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: MainActivityBinding = MainActivityBinding.inflate(layoutInflater)
-        binding.lifecycleOwner = this
-        binding.vm = viewModel
+        binding = MainActivityBinding.inflate(layoutInflater, null, false)
         setContentView(binding.root)
         viewModel.onCreate(supportFragmentManager, binding.container.id, ::finish)
         viewModel.showLoader.observe(this, binding.progressBar::isVisible::set)

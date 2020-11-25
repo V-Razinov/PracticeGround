@@ -1,49 +1,44 @@
 package ru.practiceground.presentation.vk
 
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import ru.practiceground.App
 import ru.practiceground.R
 import ru.practiceground.databinding.FragmentVkBinding
+import ru.practiceground.databinding.ItemTabBinding
 import ru.practiceground.other.castTo
-import ru.practiceground.other.getBinding
-import ru.practiceground.other.getColor
+import ru.practiceground.other.extensions.disableOverScroll
+import ru.practiceground.other.extensions.int
 import ru.practiceground.presentation.base.BaseFragment
 import ru.practiceground.presentation.vk.dialogs.CreatePostFragment
 
 class VKFragment : BaseFragment() {
 
     override val viewModel: VKViewModel by activityViewModels()
-    override val bgDrawable: Drawable? = ColorDrawable(getColor(R.color.black232))
 
-    private val adapter by lazy { VKViewPagerAdapter(this@VKFragment) }
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) { VKViewPagerAdapter(this@VKFragment) }
     private lateinit var binding: FragmentVkBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = getBinding(inflater, container, R.layout.fragment_vk)
-        binding.lifecycleOwner = this
-        binding.vm = viewModel
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentVkBinding.inflate(inflater, container, false).apply {
+            viewPager.apply {
+                adapter = this@VKFragment.adapter
+                disableOverScroll()
+                registerOnPageChangeCallback(onPageChangedCallback)
+            }
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.viewPager.apply {
-            adapter = this@VKFragment.adapter
-            getChildAt(0)?.overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            registerOnPageChangeCallback(onPageChangedCallback)
-        }
         subscribe()
     }
 
@@ -102,18 +97,18 @@ class VKFragment : BaseFragment() {
     private fun setTabs(tabs: List<TabItem>) {
         var prevCheckedTabId = -1
         tabs.forEach {
-            val tab = (layoutInflater.inflate(R.layout.item_tab, null) as Chip).apply {
+            val tabBinding = ItemTabBinding.inflate(layoutInflater, null, false)
+            tabBinding.root.apply {
                 id = View.generateViewId()
                 text = it.title
                 isChecked = it.isChecked
                 setCheckedColor()
             }
-
             if (it.isChecked) {
-                prevCheckedTabId = tab.id
+                prevCheckedTabId = tabBinding.root.id
             }
 
-            binding.chipGroup.addView(tab)
+            binding.chipGroup.addView(tabBinding.root)
         }
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == -1) {
@@ -122,8 +117,8 @@ class VKFragment : BaseFragment() {
                 prevCheckedTabId = checkedId
                 group.getChipById(checkedId)?.let { chip ->
                     binding.tabsHsv.smoothScrollTo(
-                        chip.run { x.toInt() + width.div(2) } - binding.root.width.div(2),
-                        binding.tabsHsv.y.toInt()
+                        chip.run { x.int + width.div(2) } - binding.root.width.div(2),
+                        binding.tabsHsv.y.int
                     )
                     binding.viewPager.currentItem = group.indexOfChild(chip)
                 }

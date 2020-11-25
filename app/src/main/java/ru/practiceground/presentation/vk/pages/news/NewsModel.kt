@@ -1,9 +1,11 @@
 package ru.practiceground.presentation.vk.pages.news
 
-internal const val ITEM_TYPE_CREATE_POST = 0
-internal const val ITEM_TYPE_POST = 1
-
-abstract class NewsPageAdapterBaseItem(val viewType: Int)
+abstract class NewsPageAdapterBaseItem(val viewType: Int) {
+    companion object {
+        const val ITEM_TYPE_CREATE_POST = 0
+        const val ITEM_TYPE_POST = 1
+    }
+}
 
 class StoriesItem(
     val stories: List<StoryItem>,

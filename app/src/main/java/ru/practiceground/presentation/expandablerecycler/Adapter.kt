@@ -1,12 +1,11 @@
 package ru.practiceground.presentation.expandablerecycler
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.practiceground.R
 import ru.practiceground.databinding.ItemExpandableBinding
 import ru.practiceground.other.base.ExpandableAdapter
-import ru.practiceground.other.getBinding
 
 class Adapter : ExpandableAdapter<MyItem>() {
 
@@ -22,7 +21,7 @@ class Adapter : ExpandableAdapter<MyItem>() {
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyVH(getBinding(parent, R.layout.item_expandable))
+        return MyVH(ItemExpandableBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -33,7 +32,7 @@ class Adapter : ExpandableAdapter<MyItem>() {
 
         override val viewToClick: View = binding.itemExpandableTitle
         override val viewToExpand: View = binding.itemExpandableBody
-        override val viewToRotate: View? = binding.itemExpandableArrow
+        override val viewToRotate: View = binding.itemExpandableArrow
 
         override fun bind(item: MyItem) {
             super.bind(item)

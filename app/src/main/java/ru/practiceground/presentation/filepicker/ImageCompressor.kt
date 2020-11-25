@@ -3,13 +3,8 @@ package ru.practiceground.presentation.filepicker
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import android.webkit.MimeTypeMap
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.greenrobot.eventbus.EventBus
 import ru.practiceground.App
-import ru.practiceground.other.ShowLoader
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -71,10 +66,15 @@ class ImageCompressor(private val file: File, private val sizeTo: Int) {
         file.copyTo(this)
     }
 
+    @Suppress("DEPRECATION")
     private fun getCompressFormat() = when (MimeTypeMap.getFileExtensionFromUrl(uri.toString())) {
         IMAGE_TYPE_PNG -> Bitmap.CompressFormat.PNG
         IMAGE_TYPE_JPG -> Bitmap.CompressFormat.JPEG
-        IMAGE_TYPE_WEBP -> Bitmap.CompressFormat.WEBP
+        IMAGE_TYPE_WEBP -> if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            Bitmap.CompressFormat.WEBP_LOSSY
+        } else {
+            Bitmap.CompressFormat.WEBP
+        }
         else -> null
     }
 }

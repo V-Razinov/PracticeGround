@@ -14,7 +14,7 @@ fun <T> List<T>.splitBySize(count: Int): List<List<T>> {
     }
 
     val splitted = mutableListOf<List<T>>()
-    repeat(ceil(size.toDouble().div(count)).toInt()) { iteration ->
+    repeat(ceil(size.toDouble().div(count)).int) { iteration ->
         val fromIndex = iteration * count
         val endIndex = if (fromIndex + count > size) size else fromIndex + count
         splitted.add(subList(fromIndex, endIndex))

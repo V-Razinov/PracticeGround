@@ -1,10 +1,9 @@
 package ru.practiceground.presentation.discord
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.practiceground.R
 import ru.practiceground.databinding.ItemDiscordPersonMessageBinding
-import ru.practiceground.other.getBinding
 
 class DiscordAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -13,7 +12,11 @@ class DiscordAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MessageHolder(getBinding(parent, R.layout.item_discord_person_message))
+        return MessageHolder(ItemDiscordPersonMessageBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        ))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -27,8 +30,10 @@ class DiscordAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class MessageHolder(private val binding: ItemDiscordPersonMessageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(messageItem: MessageItem) {
-            binding.item = messageItem
+        fun bind(item: MessageItem) = binding.apply {
+            nickname.text = item.nickname
+            datetime.text = item.date
+            message.text = item.message
         }
     }
 }

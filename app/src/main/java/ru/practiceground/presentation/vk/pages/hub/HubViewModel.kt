@@ -40,8 +40,10 @@ class HubViewModel : BaseViewModel() {
         )
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onCategoryClick(category: Category) {}
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onMiniAppClick(miniApp: MiniApp) {}
 
     private fun onMoreMiniAppsClick() {}

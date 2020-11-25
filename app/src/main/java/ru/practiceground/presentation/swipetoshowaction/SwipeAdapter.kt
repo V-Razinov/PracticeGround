@@ -1,14 +1,12 @@
 package ru.practiceground.presentation.swipetoshowaction
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_swipe.view.*
-import ru.practiceground.R
-import ru.practiceground.other.getView
+import ru.practiceground.databinding.ItemSwipeBinding
 import ru.practiceground.presentation.base.BaseRecViewItem
 
 class SwipeAdapter : RecyclerView.Adapter<SwipeAdapter.SwipeViewHolder>() {
@@ -22,36 +20,34 @@ class SwipeAdapter : RecyclerView.Adapter<SwipeAdapter.SwipeViewHolder>() {
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SwipeViewHolder {
-        return SwipeViewHolder(getView(parent, R.layout.item_swipe))
+        return SwipeViewHolder(ItemSwipeBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: SwipeViewHolder, position: Int) {
         holder.bind(items[position] as SwipeItem)
     }
 
-    inner class SwipeViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
-        fun bind(item: SwipeItem) {
-            view.apply {
-                item_swipe_to_show_view.apply {
-                    setOnCentralPanelClickListener {
-                        Toast.makeText(context, "click-clack", Toast.LENGTH_LONG).show()
-                    }
-                    setOnPanelChangedListener(item::currentPanel::set)
-                    setOnMovingListener(
-                        onStarted = { _, _, _ ->
-                            item_top_line_v.isVisible = true
-                            item_bottom_line_v.isVisible = true
-                        },
-                        onEnded =  { _, _, _ ->
-                            item_top_line_v.isInvisible = true
-                            item_bottom_line_v.isInvisible = true
-                        }
-                    )
+    inner class SwipeViewHolder(private val binding: ItemSwipeBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: SwipeItem) = binding.apply {
+            itemSwipeToShowView.apply {
+                setOnCentralPanelClickListener {
+                    Toast.makeText(context, "click-clack", Toast.LENGTH_LONG).show()
                 }
-
-                item_delete_iv.setOnClickListener { Toast.makeText(context, "Смэрть", Toast.LENGTH_LONG).show() }
-                item_resend_iv.setOnClickListener { Toast.makeText(context, "Смэрть", Toast.LENGTH_LONG).show() }
+                setOnPanelChangedListener(item::currentPanel::set)
+                setOnMovingListener(
+                    onStarted = { _, _, _ ->
+                        itemTopLineV.isVisible = true
+                        itemBottomLineV.isVisible = true
+                    },
+                    onEnded = { _, _, _ ->
+                        itemTopLineV.isInvisible = true
+                        itemBottomLineV.isInvisible = true
+                    }
+                )
             }
+
+            itemDeleteIv.setOnClickListener { Toast.makeText(binding.root.context, "Смэрть", Toast.LENGTH_LONG).show() }
+            itemResendIv.setOnClickListener { Toast.makeText(binding.root.context, "Смэрть", Toast.LENGTH_LONG).show() }
         }
     }
 }

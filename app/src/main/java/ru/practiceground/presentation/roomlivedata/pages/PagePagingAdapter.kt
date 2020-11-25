@@ -1,13 +1,11 @@
 package ru.practiceground.presentation.roomlivedata.pages
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_like_unlike.view.*
-import ru.practiceground.R
-import ru.practiceground.other.getView
+import ru.practiceground.databinding.ItemLikeUnlikeBinding
 import ru.practiceground.presentation.roomlivedata.ClickHandler
 import ru.practiceground.presentation.roomlivedata.LikeableItem
 
@@ -17,7 +15,7 @@ class PagePagingAdapter: PagedListAdapter<LikeableItem, PagePagingAdapter.Holder
     private var onItemCountChangedAction: (Int) -> Unit = { }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        return Holder(getView(parent, R.layout.item_like_unlike))
+        return Holder(ItemLikeUnlikeBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -38,20 +36,19 @@ class PagePagingAdapter: PagedListAdapter<LikeableItem, PagePagingAdapter.Holder
         onItemCountChangedAction = action
     }
 
-    inner class Holder(private val view: View): RecyclerView.ViewHolder(view) {
+    inner class Holder(private val binding: ItemLikeUnlikeBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: LikeableItem) {
-            view.apply {
-                item_text_tv.text = item.text
-                item_like_btn.apply {
-                    isChecked = item.isLiked
-                    setOnClickListener { clickHandler.onLikeClick(item) }
-                    setOnCheckedChangeListener { _, isChecked -> item.isLiked = isChecked }
-                }
-                item_delete_iv.setOnClickListener { clickHandler.onDeleteClick(item) }
+        fun bind(item: LikeableItem) = binding.apply {
+            itemTextTv.text = item.text
+            itemLikeBtn.apply {
+                isChecked = item.isLiked
+                setOnClickListener { clickHandler.onLikeClick(item) }
+                setOnCheckedChangeListener { _, isChecked -> item.isLiked = isChecked }
             }
+            itemDeleteIv.setOnClickListener { clickHandler.onDeleteClick(item) }
         }
     }
+
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<LikeableItem>() {

@@ -144,7 +144,7 @@ class DiscordPanelsLayout : CardView {
         var moveDirection = MoveDirection.NONE
         var lastX: Float = panelCenter.x
 
-        panelStart.setOnTouchListener { view, event ->
+        panelStart.setOnTouchListener { _, event ->
             val action: Int = event.action
 
             return@setOnTouchListener if (action == MotionEvent.ACTION_DOWN && !isDragging) {
@@ -179,7 +179,7 @@ class DiscordPanelsLayout : CardView {
         var moveDirection = MoveDirection.NONE
         var lastX: Float = panelCenter.x
 
-        panelEnd.setOnTouchListener { view, event ->
+        panelEnd.setOnTouchListener { _, event ->
             val action: Int = event.action
 
             return@setOnTouchListener if (action == MotionEvent.ACTION_DOWN && !isDragging) {

@@ -17,7 +17,8 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import ru.practiceground.R
-import ru.practiceground.other.extensions.toDp
+import ru.practiceground.other.extensions.dp
+import ru.practiceground.other.extensions.int
 import ru.practiceground.other.getColor
 import ru.practiceground.presentation.vk.pages.news.StoriesItem
 import ru.practiceground.presentation.vk.pages.news.StoryItem
@@ -57,7 +58,7 @@ class StoriesView : ConstraintLayout {
             mediaItems = value.map { MediaItem.fromUri(it.storyLink) }
         }
     private var mediaItems: List<MediaItem> = emptyList()
-    private val exoPlayer: SimpleExoPlayer by lazy { SimpleExoPlayer.Builder(context).build() }
+    private val exoPlayer: SimpleExoPlayer by lazy(SimpleExoPlayer.Builder(context)::build)
 
     init {
         with (inflate(context, R.layout.view_stories, this)) {
@@ -153,9 +154,9 @@ class StoriesView : ConstraintLayout {
     }
 
     private fun getTimeLineView() = View(context).apply {
-        layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 4.toDp(), 1f).apply {
-            marginStart = 4.toDp()
-            marginEnd = 4.toDp()
+        layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 4.dp.int, 1f).apply {
+            marginStart = 4.dp.int
+            marginEnd = 4.dp.int
         }
         background = ContextCompat.getDrawable(context, R.drawable.background_rect_filled_16)?.apply {
             setTint(getColor(R.color.whiteFFF))

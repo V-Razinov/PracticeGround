@@ -1,118 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black223"
+    android:paddingTop="16dp">
 
-    <data>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/avatar_card"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="17dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <variable
-            name="data"
-            type="ru.practiceground.presentation.vk.pages.news.CreatePostItem" />
-    </data>
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/create_post"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:foreground="?android:selectableItemBackground"
+        app:cardBackgroundColor="@color/grey"
+        app:cardCornerRadius="@dimen/default_card_corner_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/avatar_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/avatar_card"
+        app:layout_constraintTop_toTopOf="@+id/avatar_card">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="8dp"
+            android:text="@string/create_post"
+            android:textColor="@color/grey995"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/clip"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:foreground="?android:selectableItemBackground"
         android:paddingTop="16dp"
-        android:background="@color/black223">
+        android:paddingBottom="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/separator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_card">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/avatar_card"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="16dp"
-            app:cardCornerRadius="17dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                app:gildeSrc="@{data.avatarLink}" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:foreground="?android:selectableItemBackground"
-            android:onClick="@{() -> data.onCreateClick.invoke()}"
-            app:cardBackgroundColor="@color/grey"
-            app:cardCornerRadius="@dimen/default_card_corner_radius"
-            app:layout_constraintBottom_toBottomOf="@+id/avatar_card"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/avatar_card"
-            app:layout_constraintTop_toTopOf="@+id/avatar_card">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:layout_marginStart="8dp"
-                android:text="@string/create_post"
-                android:textColor="@color/grey995"
-                android:textSize="16sp" />
-        </androidx.cardview.widget.CardView>
-
-        <FrameLayout
-            android:id="@+id/clip"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foreground="?android:selectableItemBackground"
-            android:onClick="@{() -> data.onClipClick.invoke()}"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/separator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar_card">
+            android:layout_gravity="center"
+            android:drawablePadding="4dp"
+            android:text="@string/clip"
+            android:textColor="@color/blue728"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_baseline_fingerprint_24" />
+    </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawableStart="@drawable/ic_baseline_fingerprint_24"
-                android:drawablePadding="4dp"
-                android:text="@string/clip"
-                android:textColor="@color/blue728"
-                android:textSize="16sp" />
-        </FrameLayout>
+    <View
+        android:id="@+id/separator"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@+id/clip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_card" />
 
-        <View
-            android:id="@+id/separator"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/grey"
-            app:layout_constraintBottom_toBottomOf="@+id/clip"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar_card" />
+    <FrameLayout
+        android:id="@+id/live"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:foreground="?android:selectableItemBackground"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/separator"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_card">
 
-        <FrameLayout
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foreground="?android:selectableItemBackground"
-            android:onClick="@{() -> data.onLiveClick.invoke()}"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/separator"
-            app:layout_constraintTop_toBottomOf="@+id/avatar_card">
-
-            <TextView
-                android:id="@+id/live"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawableStart="@drawable/ic_round_adjust_24"
-                android:drawablePadding="4dp"
-                android:text="@string/live"
-                android:textColor="@color/blue728"
-                android:textSize="16sp" />
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+            android:layout_gravity="center"
+            android:drawablePadding="4dp"
+            android:text="@string/live"
+            android:textColor="@color/blue728"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_round_adjust_24" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

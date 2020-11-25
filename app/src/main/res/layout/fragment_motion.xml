@@ -1,34 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<ru.practiceground.other.customviews.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    app:layoutDescription="@xml/scene_1">
 
-    <ru.practiceground.other.customviews.SingleViewTouchableMotionLayout
-        android:id="@+id/motion"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@null"
-        app:layoutDescription="@xml/scene_1">
+    <FrameLayout
+        android:id="@+id/top_image_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-            android:id="@+id/top_image_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/whiteFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/top_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/cat"
-            android:transitionName="cat"
-            app:layout_constraintEnd_toEndOf="@+id/top_image_container"
-            app:layout_constraintStart_toStartOf="@+id/top_image_container"
-            app:layout_constraintTop_toTopOf="@+id/top_image_container"
-            tools:ignore="ContentDescription" />
-    </ru.practiceground.other.customviews.SingleViewTouchableMotionLayout>
-</layout>
+    <ImageView
+        android:id="@+id/top_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cat"
+        android:transitionName="cat"
+        app:layout_constraintEnd_toEndOf="@+id/top_image_container"
+        app:layout_constraintStart_toStartOf="@+id/top_image_container"
+        app:layout_constraintTop_toTopOf="@+id/top_image_container"
+        tools:ignore="ContentDescription" />
+</ru.practiceground.other.customviews.SingleViewTouchableMotionLayout>

@@ -1,10 +1,7 @@
 package ru.practiceground.presentation.motionlayout
 
-import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.practiceground.other.base.SingleLiveEvent
 import ru.practiceground.other.navigation.Screens
 import ru.practiceground.presentation.base.BaseFragment
@@ -26,7 +23,7 @@ class VidsViewModel : BaseViewModel() {
     }
     private val fragment by lazy(LazyThreadSafetyMode.NONE, Screens::motionLayout)
 
-    fun onImageClick(view: View) {
+    fun onImageClick() {
         showFragment.value = fragment
     }
 }

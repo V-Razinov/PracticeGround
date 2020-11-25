@@ -1,10 +1,9 @@
 package ru.practiceground.presentation.root
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.practiceground.R
 import ru.practiceground.databinding.ItemRootBinding
-import ru.practiceground.other.getBinding
 
 class RootAdapter : RecyclerView.Adapter<RootAdapter.Item>() {
 
@@ -14,8 +13,7 @@ class RootAdapter : RecyclerView.Adapter<RootAdapter.Item>() {
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Item {
-        val binding: ItemRootBinding = getBinding(parent, R.layout.item_root)
-        return Item(binding)
+        return Item(ItemRootBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: Item, position: Int) {
@@ -34,11 +32,9 @@ class RootAdapter : RecyclerView.Adapter<RootAdapter.Item>() {
 
     inner class Item(private val binding: ItemRootBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: RootItem) {
-            binding.apply {
-                item = data.title
-                root.setOnClickListener { onItemClickAction(data.type) }
-            }
+        fun bind(data: RootItem) = binding.apply {
+            title.text = data.title
+            root.setOnClickListener { onItemClickAction(data.type) }
         }
     }
 }

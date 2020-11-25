@@ -1,7 +1,9 @@
 package ru.practiceground.presentation.service
 
-import android.app.*
-import android.content.BroadcastReceiver
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.*
@@ -37,8 +39,8 @@ class MyService : Service() {
         }
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = intent?.let { intent ->
-        val text = intent.extras?.getString(NOTIF_CONTENT) ?: return@let START_STICKY
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = intent?.let { _intent ->
+        val text = _intent.extras?.getString(NOTIF_CONTENT) ?: return@let START_STICKY
 
         handler.obtainMessage(SERVICE_NOTIFICATION, text).let { msg ->
             handler.sendMessage(msg)

@@ -35,13 +35,13 @@ class Router {
     }
 
     fun back() {
-        onBackPressedCallback?.let {
-            it.invoke()
+        onBackPressedCallback?.let { callback ->
+            callback()
             return
         }
 
         if (fragmentManager.backStackEntryCount == 1) {
-            finishActivity.invoke()
+            finishActivity()
         } else {
             fragmentManager.popBackStack()
         }

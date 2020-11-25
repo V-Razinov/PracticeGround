@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.EventBus
 import ru.practiceground.other.ShowLoader
 import ru.practiceground.other.base.SingleLiveEvent
+import ru.practiceground.other.extensions.int
 import ru.practiceground.presentation.base.BaseViewModel
 import java.io.File
 import kotlin.math.round
@@ -32,7 +33,7 @@ class FilePickerViewModel : BaseViewModel() {
     }
 
     fun onCompressClick() {
-        openPickSizeDialog.value = file?.length()?.div(1000)?.toInt() ?: return
+        openPickSizeDialog.value = file?.length()?.div(1000)?.int ?: return
     }
 
     fun onDialogOkClick(sizeTo: Int) {

@@ -64,6 +64,7 @@ class VKViewModel : BaseViewModel() {
         )
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onStoryClick(story: StoryItem, x: Float, y: Float) {
         command.value = Command.ShowStoriesView(x to y)
     }
@@ -76,6 +77,7 @@ class VKViewModel : BaseViewModel() {
 
     private fun onLiveClick() { }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onMenuItemClick(id: Int) { }
 
     private fun getNewsPostItem() = NewsPostItem(

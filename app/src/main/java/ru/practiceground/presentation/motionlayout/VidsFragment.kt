@@ -1,30 +1,34 @@
 package ru.practiceground.presentation.motionlayout
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import ru.practiceground.App
-import ru.practiceground.R
 import ru.practiceground.databinding.FragmentVidsBinding
-import ru.practiceground.other.getBinding
 import ru.practiceground.presentation.base.BaseFragment
-import ru.practiceground.presentation.base.BaseViewModel
-import kotlin.math.abs
 
 class VidsFragment : BaseFragment() {
 
     override val viewModel: VidsViewModel by activityViewModels()
-    override val bgDrawable: Drawable? = null
+    private lateinit var binding: FragmentVidsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentVidsBinding = getBinding(inflater, container, R.layout.fragment_vids)
-        binding.lifecycleOwner = this
-        binding.vm = viewModel
-        binding.vidsMotion.transitionToEnd()
-        viewModel.subscribe {
+        binding = FragmentVidsBinding.inflate(inflater, container, false).apply {
+            vidsMotion.transitionToEnd()
+            cat1.setOnClickListener { viewModel.onImageClick() }
+            cat2.setOnClickListener { viewModel.onImageClick() }
+            cat3.setOnClickListener { viewModel.onImageClick() }
+            cat4.setOnClickListener { viewModel.onImageClick() }
+            cat5.setOnClickListener { viewModel.onImageClick() }
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.apply {
             sceneProgress.observe(viewLifecycleOwner) { progress ->
                 binding.vidsMotion.progress = progress
             }
@@ -43,8 +47,5 @@ class VidsFragment : BaseFragment() {
                 }
             }
         }
-        return binding.root
     }
-
-    private fun <VM : BaseViewModel> VM.subscribe(action: VM.() -> Unit) = action(this)
 }

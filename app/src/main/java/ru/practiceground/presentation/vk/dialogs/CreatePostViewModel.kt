@@ -7,7 +7,7 @@ import java.util.*
 
 class CreatePostViewModel : BaseViewModel() {
     val isPublic = MutableLiveData(true)
-    val time = MutableLiveData<Calendar>()
+    val time = MutableLiveData<Calendar?>()
     val topics = MutableLiveData<List<Topic>>(emptyList())
 
     fun onCheckClick() {
