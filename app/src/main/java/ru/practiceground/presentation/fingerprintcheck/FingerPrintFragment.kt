@@ -28,8 +28,8 @@ class FingerPrintFragment : BaseFragment() {
     }
 
     private fun subscribe() {
-        viewModel.apply {
-            showBiometricPrompt.setObserver {
+        with(viewModel) {
+            showBiometricPrompt.observe {
                 val info = BiometricPrompt.PromptInfo.Builder()
                     .setTitle(it.title)
                     .setSubtitle(it.subtitle)
@@ -38,7 +38,7 @@ class FingerPrintFragment : BaseFragment() {
                 val prompt = BiometricPrompt(this@FingerPrintFragment, it.executor, it.callback)
                 prompt.authenticate(info)
             }
-            fingerPrintStatus.setObserver(binding.fingerprintStatusTv::setText)
+            fingerPrintStatus.observe(binding.fingerprintStatusTv::setText)
         }
     }
 }

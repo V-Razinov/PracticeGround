@@ -18,7 +18,9 @@ class ViewPagerAdapter(parentFragment: Fragment) : FragmentStateAdapter(parentFr
 
     fun callResume(position: Int) {
         try {
-            fragments[position].value.onResume()
+            fragments[position].value.let { frg ->
+                (frg as? PageAllFragment)?.setCounter() ?: (frg as? PageFavsFragment)?.setCounter()
+            }
         } catch (e: Exception) { /*ignore*/ }
     }
 }

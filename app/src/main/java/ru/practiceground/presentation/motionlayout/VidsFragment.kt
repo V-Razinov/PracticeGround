@@ -14,7 +14,7 @@ class VidsFragment : BaseFragment() {
     override val viewModel: VidsViewModel by activityViewModels()
     private lateinit var binding: FragmentVidsBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentVidsBinding.inflate(inflater, container, false).apply {
             vidsMotion.transitionToEnd()
             cat1.setOnClickListener { viewModel.onImageClick() }

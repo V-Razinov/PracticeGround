@@ -8,16 +8,11 @@ import androidx.paging.toLiveData
 import ru.practiceground.data.room.dao.LikeableDao
 import ru.practiceground.data.room.entity.LikeableEntity
 import ru.practiceground.presentation.roomlivedata.LikeableItem
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LikeableRepository private constructor(private val likeableDao: LikeableDao) {
-
-    companion object {
-        private var instance: LikeableRepository? = null
-
-        fun getInstance(likeableDao: LikeableDao): LikeableRepository = instance ?: synchronized(this) {
-            LikeableRepository(likeableDao = likeableDao).also(::instance::set)
-        }
-    }
+@Singleton
+class LikeableRepository @Inject constructor(private val likeableDao: LikeableDao) {
 
     val allPaging: LiveData<PagedList<LikeableItem>> by lazy { likeableDao.getAllPaging().map(::LikeableItem).toLiveData(config) }
     val favsPaging: LiveData<PagedList<LikeableItem>> by lazy { likeableDao.getFavsPaging().map(::LikeableItem).toLiveData(config) }

@@ -35,7 +35,7 @@ class RootFragment : BaseFragment() {
 
     private fun subscribe() {
         viewModel.apply {
-            items.setObserver(rootAdapter::setItems)
+            items.observe(rootAdapter::setItems)
         }
     }
 }

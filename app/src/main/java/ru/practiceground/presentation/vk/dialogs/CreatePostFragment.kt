@@ -53,14 +53,14 @@ class CreatePostFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewModel) {
-            isPublic.setObserver { isPublic ->
+            isPublic.observe { isPublic ->
                 binding.privacy.setCheckedColor(
                     !isPublic,
                     if (isPublic) R.drawable.ic_round_person_outline_24 else R.drawable.ic_round_lock_24
                 )
             }
             time.observe(viewLifecycleOwner) { binding.time.setCheckedColor(it == null) }
-            topics.setObserver { binding.topic.setCheckedColor(it.isNotEmpty()) }
+            topics.observe { binding.topic.setCheckedColor(it.isNotEmpty()) }
         }
     }
 

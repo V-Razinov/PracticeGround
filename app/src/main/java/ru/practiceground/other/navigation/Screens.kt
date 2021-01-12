@@ -2,7 +2,9 @@ package ru.practiceground.other.navigation
 
 import ru.practiceground.presentation.custommessages.CustomMessagesFragment
 import ru.practiceground.presentation.discord.DiscordFragment
+import ru.practiceground.presentation.doublevpmotion.DoubleVpFragment
 import ru.practiceground.presentation.drawer.DrawerFragment
+import ru.practiceground.presentation.expandablelinkedrv.ExpLinkedRvFragment
 import ru.practiceground.presentation.expandablerecycler.ExpandableRecyclerFragment
 import ru.practiceground.presentation.filepicker.FilePickerFragment
 import ru.practiceground.presentation.fingerprintcheck.FingerPrintFragment
@@ -28,4 +30,6 @@ object Screens {
     val vidsFragment get() = VidsFragment()
     val motionLayout get() = MotionFragment()
     val myService get() = MyServiceFragment()
+    val doubleVp get() = DoubleVpFragment()
+    val expLinkedRv get() = ExpLinkedRvFragment()
 }

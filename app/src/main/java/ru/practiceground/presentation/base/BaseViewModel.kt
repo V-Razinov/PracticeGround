@@ -9,6 +9,7 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val router = App.router
     protected val context get() = App.context
+    protected val appComponent get() = App.appComponent
 
     open fun onViewCreated() = Unit
 

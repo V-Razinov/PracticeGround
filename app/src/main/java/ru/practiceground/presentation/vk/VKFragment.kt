@@ -23,7 +23,7 @@ class VKFragment : BaseFragment() {
 
     override val viewModel: VKViewModel by activityViewModels()
 
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) { VKViewPagerAdapter(this@VKFragment) }
+    private val adapter = VKViewPagerAdapter(this@VKFragment)
     private lateinit var binding: FragmentVkBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -49,13 +49,13 @@ class VKFragment : BaseFragment() {
 
     private fun subscribe() {
         with(viewModel) {
-            tabs.setObserver(::setTabs)
-            stories.setObserver(binding.stories::setStories)
-            pages.setObserver {
+            tabs.observe(::setTabs)
+            stories.observe(binding.stories::setStories)
+            pages.observe {
                 binding.viewPager.offscreenPageLimit = it.size
                 adapter.setPages(it)
             }
-            command.setObserver(::executeCommand)
+            command.observe(::executeCommand)
         }
     }
 

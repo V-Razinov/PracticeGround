@@ -32,8 +32,8 @@ class HubFragment : BaseFragment() {
 
     private fun subscribe() {
         with(viewModel) {
-            items.setObserver(adapter::setItems)
-            notifyItemChanged.setObserver(adapter::notifyByViewType)
+            items.observe(adapter::setItems)
+            notifyItemChanged.observe(adapter::notifyByViewType)
         }
     }
 }

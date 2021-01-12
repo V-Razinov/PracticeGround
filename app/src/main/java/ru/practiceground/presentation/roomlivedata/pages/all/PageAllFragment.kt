@@ -46,16 +46,15 @@ class PageAllFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.apply {
-            items.setObserver {
+            items.observe {
                 adapter.submitList(it)
                 binding.image.isVisible = it.isEmpty()
             }
-            clickHandler.setObserver(adapter::setClickHandler)
+            clickHandler.observe(adapter::setClickHandler)
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    internal fun setCounter() {
         counter?.text = (viewModel.items.value?.size ?: 0).string
     }
 }

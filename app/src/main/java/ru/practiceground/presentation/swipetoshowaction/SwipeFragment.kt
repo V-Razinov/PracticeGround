@@ -28,6 +28,6 @@ class SwipeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.items.setObserver(adapter::items::set)
+        viewModel.items.observe(adapter::items::set)
     }
 }

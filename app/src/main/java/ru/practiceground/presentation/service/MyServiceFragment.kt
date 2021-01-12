@@ -39,7 +39,7 @@ class MyServiceFragment : BaseFragment() {
 
     private fun subscribe() {
         viewModel.apply {
-            message.setObserver(binding.message::setText)
+            message.observe(binding.message::setText)
         }
     }
 

@@ -35,11 +35,11 @@ abstract class BaseFragment : Fragment() {
         viewModel.onStop()
     }
 
-    protected inline fun <T> MutableLiveData<T>.setObserver(crossinline action: (T) -> Unit) {
+    protected inline fun <T> MutableLiveData<T>.observe(crossinline action: (T) -> Unit) {
         observe(viewLifecycleOwner) { action(it) }
     }
 
-    protected inline fun <T> SingleLiveEvent<T>.setObserver(crossinline action: (T) -> Unit) {
+    protected inline fun <T> SingleLiveEvent<T>.observe(crossinline action: (T) -> Unit) {
         observe(viewLifecycleOwner) { action(it ?: return@observe) }
     }
 
@@ -47,7 +47,7 @@ abstract class BaseFragment : Fragment() {
         observe(viewLifecycleOwner, { it ?: return@observe; action() })
     }
 
-    protected inline fun <T> LiveData<T>.setObserver(crossinline action: (T) -> Unit) {
+    protected inline fun <T> LiveData<T>.observe(crossinline action: (T) -> Unit) {
         observe(viewLifecycleOwner) { action(it) }
     }
 }

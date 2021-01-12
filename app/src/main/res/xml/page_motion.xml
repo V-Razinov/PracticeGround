@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/delete" />
+
+        <Constraint
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/image" />
+
+        <Constraint
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <Constraint
+            android:id="@+id/delete"
+            android:visibility="visible" />
+
+        <Constraint
+            android:id="@+id/visible"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/visible"
+            android:visibility="gone" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"/>
+
+        <Constraint
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintStart_toEndOf="@+id/image"
+            motion:layout_constraintTop_toTopOf="@+id/image" />
+
+        <Constraint
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintStart_toEndOf="@+id/image"
+            motion:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <Constraint
+            android:id="@+id/delete"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/buy"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/favourite"
+            android:visibility="gone" />
+    </ConstraintSet>
+
+    <Transition
+        motion:constraintSetEnd="@id/end"
+        motion:constraintSetStart="@id/start"
+        motion:motionInterpolator="linear" />
+</MotionScene>

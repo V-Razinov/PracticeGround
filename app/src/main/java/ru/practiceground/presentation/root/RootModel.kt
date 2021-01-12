@@ -11,6 +11,7 @@ class RootItem(
 enum class RootItems(val title: String, val getFragment: () -> BaseFragment) {
     DISCORD_VIEW_PAGER("Farewell's discord", Screens::discord),
     EXPANDABLE_RECYCLER("Expandable Recycler", Screens::expandableRecView),
+    EXPANDABLE_LINKED_RECYCLER("Expandable Linked Recycler", Screens::expLinkedRv),
     ALL_IN_ONE("Swipe To Show Action", Screens::swipeToShowAction),
     FINGERPRINT("FingerPrint", Screens::fingerprint),
     DRAWER("Drawer", Screens::drawer),
@@ -19,5 +20,6 @@ enum class RootItems(val title: String, val getFragment: () -> BaseFragment) {
     FILE_PICKER("File picker and compressor", Screens::filePicker),
     CUSTOM_VIEWS("VK", Screens::vk),
     MOTION_LAYOUT("Motion layout", Screens::vidsFragment),
-    MY_SERVICE("Notif service", Screens::myService)
+    MY_SERVICE("Notif service", Screens::myService),
+    DOBULE_VP("double view pager", Screens::doubleVp)
 }

@@ -60,7 +60,7 @@ class DiscordFragment : BaseFragment() {
 
     private fun subscribe() {
         viewModel.apply {
-            messages.setObserver(adapter::setItems)
+            messages.observe(adapter::setItems)
         }
     }
 }

@@ -36,8 +36,8 @@ class NewsPageFragment : BaseFragment() {
 
     private fun subscribe() {
         with(viewModel) {
-            stories.setObserver(::addStories)
-            newsItems.setObserver(adapter::setItems)
+            stories.observe(::addStories)
+            newsItems.observe(adapter::setItems)
         }
     }
 

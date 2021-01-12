@@ -40,15 +40,15 @@ class FilePickerFragment : BaseFragment() {
 
     private fun subscribe() {
         with(viewModel) {
-            name.setObserver(binding.name::setText)
-            size.setObserver(binding.size::setText)
+            name.observe(binding.name::setText)
+            size.observe(binding.size::setText)
             openFilePicker.setUnitObserver(::startFilePicker)
-            fileUri.setObserver { uri ->
+            fileUri.observe { uri ->
                 Glide.with(this@FilePickerFragment).run {
                     if (uri == null) load(R.drawable.ic_round_image_24) else load(uri)
                 }.into(binding.imageIv)
             }
-            openPickSizeDialog.setObserver(::openSizeDialog)
+            openPickSizeDialog.observe(::openSizeDialog)
         }
     }
 

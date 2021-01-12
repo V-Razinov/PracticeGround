@@ -12,22 +12,15 @@ import ru.practiceground.data.room.repos.LikeableRepository
 import ru.practiceground.presentation.base.BaseViewModel
 import ru.practiceground.presentation.roomlivedata.ClickHandler
 import ru.practiceground.presentation.roomlivedata.LikeableItem
+import javax.inject.Inject
 
 class PageFavsViewModel : BaseViewModel() {
 
-    private val repository = LikeableRepository
-        .getInstance(LikeableDataBase.getInstance(App.context, viewModelScope).likeableDao())
+    @Inject
+    lateinit var repository: LikeableRepository
 
-    // Если не нужна пагинация
-//    val items = MediatorLiveData<Pair<List<LikeableItem>, DiffUtil.DiffResult>>().apply {
-//        addSource(repository.favs) { newValue ->
-//            viewModelScope.launch(Dispatchers.IO) {
-//                val diffUtilResult =
-//                    DiffUtil.calculateDiff(LikeableItem.DiffsCallback(value?.first ?: emptyList(), newValue))
-//                withContext(Dispatchers.Main) { value = newValue to diffUtilResult}
-//            }
-//        }
-//    }
+    init { appComponent.viewPagerComponent().inject(this) }
+
     val items: LiveData<PagedList<LikeableItem>> = repository.favsPaging
     val clickHandler = MutableLiveData(ClickHandler(::onLikeClick, ::onDeleteClick))
 

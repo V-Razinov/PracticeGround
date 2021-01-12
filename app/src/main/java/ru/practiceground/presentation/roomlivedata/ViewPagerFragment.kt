@@ -30,7 +30,7 @@ class ViewPagerFragment : BaseFragment() {
     internal val fab get() = binding.fabCard
     internal val counter get() = binding.counter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentViewPagerBinding.inflate(layoutInflater, container, false).apply {
             pager.apply {
                 adapter = ViewPagerAdapter(this@ViewPagerFragment)
