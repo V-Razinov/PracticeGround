@@ -21,5 +21,6 @@ enum class RootItems(val title: String, val getFragment: () -> BaseFragment) {
     CUSTOM_VIEWS("VK", Screens::vk),
     MOTION_LAYOUT("Motion layout", Screens::vidsFragment),
     MY_SERVICE("Notif service", Screens::myService),
-    DOBULE_VP("double view pager", Screens::doubleVp)
+    DOBULE_VP("double view pager", Screens::doubleVp),
+    MOTION2("motion2", Screens::motion2)
 }

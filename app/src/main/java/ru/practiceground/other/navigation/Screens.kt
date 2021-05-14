@@ -8,6 +8,7 @@ import ru.practiceground.presentation.expandablelinkedrv.ExpLinkedRvFragment
 import ru.practiceground.presentation.expandablerecycler.ExpandableRecyclerFragment
 import ru.practiceground.presentation.filepicker.FilePickerFragment
 import ru.practiceground.presentation.fingerprintcheck.FingerPrintFragment
+import ru.practiceground.presentation.motion2.Motion2Fragment
 import ru.practiceground.presentation.motionlayout.MotionFragment
 import ru.practiceground.presentation.motionlayout.VidsFragment
 import ru.practiceground.presentation.roomlivedata.ViewPagerFragment
@@ -32,4 +33,5 @@ object Screens {
     val myService get() = MyServiceFragment()
     val doubleVp get() = DoubleVpFragment()
     val expLinkedRv get() = ExpLinkedRvFragment()
+    val motion2 get() = Motion2Fragment()
 }

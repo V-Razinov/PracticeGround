@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/cat1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/cat2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/cat3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/cat4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/bob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:scaleX="0"
+            android:scaleY="0"
+            android:src="@drawable/bob"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/arrow_left"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:alpha="0"
+            android:background="@drawable/ic_arrow_down_24"
+            android:rotation="-90"
+            app:layout_constraintBottom_toBottomOf="@+id/bob"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bob" />
+
+        <Constraint
+            android:id="@+id/arrow_right"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:alpha="0"
+            android:background="@drawable/ic_arrow_down_24"
+            android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="@+id/bob"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bob" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/cat1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:rotation="360"
+            android:src="@drawable/cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/cat2"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:rotation="-360"
+            android:src="@drawable/cat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/cat3"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:rotation="360"
+            android:src="@drawable/cat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/cat4"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:rotation="-360"
+            android:src="@drawable/cat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/bob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:visibility="visible"
+            android:src="@drawable/bob"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/arrow_left"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:alpha="1"
+            android:background="@drawable/ic_arrow_down_24"
+            android:rotation="-90"
+            app:layout_constraintBottom_toBottomOf="@+id/bob"
+            app:layout_constraintEnd_toStartOf="@+id/bob"
+            app:layout_constraintTop_toTopOf="@+id/bob" />
+
+        <Constraint
+            android:id="@+id/arrow_right"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:alpha="1"
+            android:background="@drawable/ic_arrow_down_24"
+            android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="@+id/bob"
+            app:layout_constraintStart_toEndOf="@+id/bob"
+            app:layout_constraintTop_toTopOf="@+id/bob" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="500">
+
+        <OnClick app:targetId="@id/cat1" app:clickAction="transitionToEnd"/>
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="500">
+
+        <OnClick app:targetId="@id/cat2" app:clickAction="transitionToEnd"/>
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="500">
+
+        <OnClick app:targetId="@id/cat3" app:clickAction="transitionToEnd"/>
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="500">
+
+        <OnClick app:targetId="@id/cat4" app:clickAction="transitionToEnd"/>
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="500">
+
+        <OnClick app:targetId="@id/bob" app:clickAction="transitionToStart"/>
+    </Transition>
+</MotionScene>
